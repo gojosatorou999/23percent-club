@@ -18,14 +18,17 @@ export function BlogCard({
   return (
     <Link
       href={`/learn/blog/${post.slug}`}
-      className="group flex flex-col gap-3 rounded-2xl border border-border bg-white p-6 transition-colors hover:border-sapphire"
+      className="glass lift group flex h-full flex-col gap-3 rounded p-6"
     >
-      <div className="flex items-center gap-2 font-body text-xs font-medium uppercase tracking-wide text-sapphire">
+      <div className="flex items-center gap-2 font-body text-xs font-medium uppercase tracking-wide text-accent">
         <span>{CATEGORY_LABEL[post.category]}</span>
-        <span aria-hidden="true" className="text-border">
+        <span aria-hidden="true" className="text-content-2/40">
           ·
         </span>
-        <time dateTime={post.date} className="text-slate normal-case tracking-normal">
+        <time
+          dateTime={post.date}
+          className="text-content-2 normal-case tracking-normal"
+        >
           {new Date(post.date).toLocaleDateString("en-IN", {
             day: "numeric",
             month: "short",
@@ -33,13 +36,13 @@ export function BlogCard({
           })}
         </time>
       </div>
-      <h3 className="font-display text-lg font-semibold text-ink group-hover:text-sapphire">
+      <h3 className="font-display text-lg font-semibold text-content transition-colors group-hover:text-accent">
         {post.title}
       </h3>
-      <p className="font-body text-sm leading-relaxed text-slate">
+      <p className="font-body text-sm leading-relaxed text-content-2">
         {post.excerpt}
       </p>
-      <span className="font-body text-xs text-slate">
+      <span className="font-body text-xs text-content-2">
         {post.readTime} min read
       </span>
     </Link>

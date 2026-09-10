@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMoneyBasicsTopics, getMoneyBasicsTopic } from "@/lib/content";
 import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/layout/Section";
 import { SourceCitation } from "@/components/ui/SourceCitation";
 
@@ -36,23 +37,25 @@ export default async function MoneyBasicsTopicPage({
   const { frontmatter, content } = page;
 
   return (
-    <Section>
-      <Container className="mx-auto max-w-3xl">
-        <h1 className="mb-8 font-display text-3xl font-semibold text-ink sm:text-4xl">
-          {frontmatter.title}
-        </h1>
+    <>
+      <PageHero title={frontmatter.title} width="prose" />
 
-        <article>{content}</article>
+      <Section>
+        <Container width="prose">
+          <article>{content}</article>
 
-        {frontmatter.sources.length > 0 && (
-          <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6">
-            <p className="font-body text-xs font-medium uppercase tracking-wide text-slate">Sources</p>
-            {frontmatter.sources.map((source) => (
-              <SourceCitation key={source} label={source} />
-            ))}
-          </div>
-        )}
-      </Container>
-    </Section>
+          {frontmatter.sources.length > 0 && (
+            <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6">
+              <p className="font-body text-xs font-medium uppercase tracking-wide text-content-2">
+                Sources
+              </p>
+              {frontmatter.sources.map((source) => (
+                <SourceCitation key={source} label={source} />
+              ))}
+            </div>
+          )}
+        </Container>
+      </Section>
+    </>
   );
 }

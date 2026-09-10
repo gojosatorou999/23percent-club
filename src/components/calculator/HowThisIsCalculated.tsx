@@ -14,7 +14,7 @@ export function HowThisIsCalculated({
 }) {
   return (
     <Expandable title="How this is calculated">
-      <code className="mb-3 block rounded-md bg-white px-3 py-2 font-mono text-xs text-sapphire">
+      <code className="mb-3 block rounded-md bg-surface-3 px-3 py-2 font-mono text-xs text-accent">
         {formula}
       </code>
       <p>{explanation}</p>

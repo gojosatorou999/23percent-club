@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { LumpsumForm } from "@/components/calculator/LumpsumForm";
-import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
+import { CalculatorShell } from "@/components/calculator/CalculatorShell";
 
 export const metadata: Metadata = {
   title: "Lumpsum Calculator",
@@ -11,10 +10,11 @@ export const metadata: Metadata = {
 
 export default function LumpsumCalculatorPage() {
   return (
-    <Section>
-      <Container>
-        <LumpsumForm />
-      </Container>
-    </Section>
+    <CalculatorShell
+      title="Lumpsum Calculator"
+      description="See what a one-time investment could be worth at maturity, based on an assumed rate of return you control."
+    >
+      <LumpsumForm />
+    </CalculatorShell>
   );
 }

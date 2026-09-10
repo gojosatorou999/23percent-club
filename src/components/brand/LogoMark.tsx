@@ -2,8 +2,21 @@
  * The signature mark: an ECG heartbeat line whose central spike doubles as
  * a plus-sign cross (Sapphire line, Bright-Blue cross overlay). Renders at
  * any size — used standalone (favicon-scale) or paired with the wordmark.
+ *
+ * On a deep-field background Sapphire is nearly the background colour, so
+ * the `light` tone swaps the trace to white and leaves the cross Bright
+ * Blue — the same two-tone relationship, re-pitched for a dark ground.
  */
-export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
+export function LogoMark({
+  className = "h-8 w-8",
+  tone = "ink",
+}: {
+  className?: string;
+  tone?: "ink" | "light";
+}) {
+  const trace =
+    tone === "light" ? "var(--color-white)" : "var(--color-sapphire)";
+
   return (
     <svg
       viewBox="0 0 64 64"
@@ -14,7 +27,7 @@ export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
       <polyline
         points="4,32 20,32 24,32 26,26 28,38 30,10 32,54 34,32 60,32"
         fill="none"
-        stroke="var(--color-sapphire)"
+        stroke={trace}
         strokeWidth="3.5"
         strokeLinecap="round"
         strokeLinejoin="round"

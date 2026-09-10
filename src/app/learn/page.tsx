@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedPosts, getMoneyBasicsTopics } from "@/lib/content";
 import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { BlogCard } from "@/components/cards/BlogCard";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Learn",
@@ -17,52 +19,87 @@ export default function LearnHubPage() {
   const topics = getMoneyBasicsTopics();
 
   return (
-    <Section>
-      <Container className="flex flex-col gap-14">
-        <header className="flex flex-col gap-3">
-          <h1 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Learn</h1>
-          <p className="max-w-2xl font-body text-base text-slate">
-            Everything on this site that isn&apos;t a calculator lives here:
-            the blog, the Money Basics explainer hub, and the site&apos;s
-            other education modules as they ship.
-          </p>
-        </header>
+    <>
+      <PageHero
+        title="Learn"
+        intro="Everything on this site that isn't a calculator lives here: the blog, the Money Basics explainer hub, and the site's other education modules as they ship."
+        seam="offWhite"
+      />
 
-        <div className="flex flex-col gap-6">
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink">Blog</h2>
-            <Link href="/learn/blog" className="font-body text-sm font-medium text-sapphire hover:underline">
-              View all posts →
-            </Link>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {latestPosts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-6">
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink">Money Basics</h2>
-            <Link
-              href="/learn/money-basics"
-              className="font-body text-sm font-medium text-sapphire hover:underline"
+      <Section tone="muted">
+        <Container className="flex flex-col gap-14">
+          <div className="flex flex-col gap-6">
+            <Reveal
+              variant="soft"
+              className="flex items-baseline justify-between gap-4"
             >
-              View all topics →
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-5">
-            {topics.map((topic) => (
-              <Link key={topic.topic} href={`/learn/money-basics/${topic.topic}`}>
-                <Card className="p-4 text-center transition-colors hover:border-sapphire">
-                  <span className="font-body text-sm font-medium text-ink">{topic.title}</span>
-                </Card>
+              <h2 className="font-display text-2xl font-semibold text-content">
+                Blog
+              </h2>
+              <Link
+                href="/learn/blog"
+                className="font-body text-sm font-medium text-accent hover:underline"
+              >
+                View all posts →
               </Link>
-            ))}
+            </Reveal>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {latestPosts.map((post, i) => (
+                <Reveal
+                  key={post.slug}
+                  index={i}
+                  count={latestPosts.length}
+                  className="h-full"
+                >
+                  <BlogCard post={post} />
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </Container>
-    </Section>
+
+          <div className="flex flex-col gap-6">
+            <Reveal
+              variant="soft"
+              className="flex items-baseline justify-between gap-4"
+            >
+              <h2 className="font-display text-2xl font-semibold text-content">
+                Money Basics
+              </h2>
+              <Link
+                href="/learn/money-basics"
+                className="font-body text-sm font-medium text-accent hover:underline"
+              >
+                View all topics →
+              </Link>
+            </Reveal>
+            <div className="grid gap-4 sm:grid-cols-5">
+              {topics.map((topic, i) => (
+                <Reveal
+                  key={topic.topic}
+                  index={i}
+                  count={topics.length}
+                  className="h-full"
+                >
+                  <Link
+                    href={`/learn/money-basics/${topic.topic}`}
+                    className="block h-full"
+                  >
+                    <Card
+                      surface="glass"
+                      lift
+                      className="h-full p-4 text-center"
+                    >
+                      <span className="font-body text-sm font-medium text-content">
+                        {topic.title}
+                      </span>
+                    </Card>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
   );
 }

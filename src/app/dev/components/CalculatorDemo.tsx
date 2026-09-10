@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CalculatorLayout } from "@/components/calculator/CalculatorLayout";
+import { CalculatorBody } from "@/components/calculator/CalculatorBody";
 import { InputSlider } from "@/components/calculator/InputSlider";
 import { ResultPanel } from "@/components/calculator/ResultPanel";
 import { HowThisIsCalculated } from "@/components/calculator/HowThisIsCalculated";
@@ -44,9 +44,7 @@ export function CalculatorDemo() {
   }, [monthly, returnPct, years]);
 
   return (
-    <CalculatorLayout
-      title="SIP Calculator (demo)"
-      description="Interactive demo of the calculator shell — inputs on one side, the hero result on the other."
+    <CalculatorBody
       inputs={
         <>
           <InputSlider

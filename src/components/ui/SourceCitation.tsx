@@ -10,7 +10,7 @@ export function SourceCitation({
   label: string;
 }) {
   const content = (
-    <span className="font-body text-xs text-slate">
+    <span className="font-body text-xs text-content-2">
       Source: {label}
     </span>
   );
@@ -22,7 +22,7 @@ export function SourceCitation({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="font-body text-xs text-slate underline decoration-border decoration-1 underline-offset-2 hover:text-sapphire"
+      className="font-body text-xs text-content-2 underline decoration-border decoration-1 underline-offset-2 hover:text-accent"
     >
       Source: {label}
     </a>

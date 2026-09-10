@@ -15,7 +15,7 @@ export const GrowthChart = dynamic<{ series: YearPoint[] }>(
     ssr: false,
     loading: () => (
       <div
-        className="h-64 w-full animate-pulse rounded-lg bg-border/40"
+        className="h-64 w-full animate-pulse rounded-lg bg-line/40"
         role="img"
         aria-label="Loading growth chart"
       />

@@ -26,11 +26,11 @@ function Swatch({ name, varName }: { name: string; varName: string }) {
   return (
     <div className="flex flex-col gap-2">
       <div
-        className="h-16 w-full rounded-lg border border-border"
+        className="h-16 w-full rounded-lg border border-line"
         style={{ background: `var(${varName})` }}
       />
-      <div className="font-body text-xs text-slate">
-        <div className="font-medium text-ink">{name}</div>
+      <div className="font-body text-xs text-content-2">
+        <div className="font-medium text-content">{name}</div>
         <code>{varName}</code>
       </div>
     </div>
@@ -42,10 +42,10 @@ export default function ComponentGallery() {
     <div className="flex flex-col">
       <Section tone="muted" className="!py-12">
         <Container>
-          <h1 className="font-display text-3xl font-semibold text-ink">
+          <h1 className="font-display text-3xl font-semibold text-content">
             Component Gallery
           </h1>
-          <p className="mt-2 max-w-2xl font-body text-slate">
+          <p className="mt-2 max-w-2xl font-body text-content-2">
             Internal reference for every shared component in every state.
             Not indexed, not linked from the site nav. See README §8 Phase 1.
           </p>
@@ -55,7 +55,7 @@ export default function ComponentGallery() {
       {/* Tokens */}
       <Section>
         <Container className="flex flex-col gap-8">
-          <h2 className="font-display text-2xl font-semibold text-ink">
+          <h2 className="font-display text-2xl font-semibold text-content">
             Tokens — Sapphire Blue
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -70,13 +70,13 @@ export default function ComponentGallery() {
             <Swatch name="Border" varName="--color-border" />
           </div>
           <div className="flex flex-col gap-3">
-            <p className="font-display text-4xl font-semibold text-ink">
+            <p className="font-display text-4xl font-semibold text-content">
               Outfit display type
             </p>
-            <p className="font-body text-base text-ink">
+            <p className="font-body text-base text-content">
               Inter body type — the quick brown fox jumps over the lazy dog. 1234567890
             </p>
-            <p className="tabular-nums font-body text-base text-ink">
+            <p className="tabular-nums font-body text-base text-content">
               Tabular numerals: ₹1,23,456.78 vs ₹9,87,654.32 (columns align)
             </p>
           </div>
@@ -86,19 +86,19 @@ export default function ComponentGallery() {
       {/* Brand */}
       <Section tone="muted">
         <Container className="flex flex-col gap-8">
-          <h2 className="font-display text-2xl font-semibold text-ink">Brand marks</h2>
+          <h2 className="font-display text-2xl font-semibold text-content">Brand marks</h2>
           <div className="flex flex-wrap items-end gap-10">
             <div className="flex flex-col items-center gap-2">
               <LogoMark className="h-16 w-16" />
-              <span className="font-body text-xs text-slate">LogoMark</span>
+              <span className="font-body text-xs text-content-2">LogoMark</span>
             </div>
             <div className="flex flex-col items-start gap-2">
               <LogoHorizontal />
-              <span className="font-body text-xs text-slate">LogoHorizontal</span>
+              <span className="font-body text-xs text-content-2">LogoHorizontal</span>
             </div>
-            <div className="flex flex-col items-center gap-2 rounded-xl border border-border bg-white p-6">
+            <div className="flex flex-col items-center gap-2 rounded border border-line bg-surface-3 p-6">
               <LogoStacked />
-              <span className="font-body text-xs text-slate">LogoStacked</span>
+              <span className="font-body text-xs text-content-2">LogoStacked</span>
             </div>
           </div>
         </Container>
@@ -107,7 +107,7 @@ export default function ComponentGallery() {
       {/* Buttons */}
       <Section>
         <Container className="flex flex-col gap-6">
-          <h2 className="font-display text-2xl font-semibold text-ink">Buttons</h2>
+          <h2 className="font-display text-2xl font-semibold text-content">Buttons</h2>
           <div className="flex flex-wrap items-center gap-4">
             <Button>Primary — default</Button>
             <Button className="opacity-90">Primary — hover (simulated)</Button>
@@ -120,7 +120,7 @@ export default function ComponentGallery() {
               Button as link
             </ButtonLink>
           </div>
-          <p className="font-body text-xs text-slate">
+          <p className="font-body text-xs text-content-2">
             Real focus state: tab to any interactive element on this page —
             the ring is a global `:focus-visible` style, not per-component.
           </p>
@@ -130,12 +130,12 @@ export default function ComponentGallery() {
       {/* Card + Expandable + Compliance + Citation */}
       <Section tone="muted">
         <Container className="flex flex-col gap-8">
-          <h2 className="font-display text-2xl font-semibold text-ink">
+          <h2 className="font-display text-2xl font-semibold text-content">
             Card, Expandable, Compliance, Citation
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
             <Card className="p-6">
-              <p className="font-body text-sm text-ink">Base Card primitive — border + radius only.</p>
+              <p className="font-body text-sm text-content">Base Card primitive — border + radius only.</p>
             </Card>
             <div className="flex flex-col gap-3">
               <Expandable title="How this is calculated (closed — default)">
@@ -159,28 +159,28 @@ export default function ComponentGallery() {
       {/* Pagination + CategoryFilter */}
       <Section>
         <Container className="flex flex-col gap-8">
-          <h2 className="font-display text-2xl font-semibold text-ink">
+          <h2 className="font-display text-2xl font-semibold text-content">
             Pagination &amp; Category Filter
           </h2>
           <div className="flex flex-col gap-4">
             <div>
-              <p className="mb-1 font-body text-xs text-slate">Middle page</p>
+              <p className="mb-1 font-body text-xs text-content-2">Middle page</p>
               <Pagination currentPage={3} totalPages={7} buildHref={(p) => `?page=${p}`} />
             </div>
             <div>
-              <p className="mb-1 font-body text-xs text-slate">First page (Previous disabled)</p>
+              <p className="mb-1 font-body text-xs text-content-2">First page (Previous disabled)</p>
               <Pagination currentPage={1} totalPages={7} buildHref={(p) => `?page=${p}`} />
             </div>
             <div>
-              <p className="mb-1 font-body text-xs text-slate">Last page (Next disabled)</p>
+              <p className="mb-1 font-body text-xs text-content-2">Last page (Next disabled)</p>
               <Pagination currentPage={7} totalPages={7} buildHref={(p) => `?page=${p}`} />
             </div>
             <div>
-              <p className="mb-1 font-body text-xs text-slate">
+              <p className="mb-1 font-body text-xs text-content-2">
                 Empty state — totalPages=1 renders nothing (no pagination needed)
               </p>
               <Pagination currentPage={1} totalPages={1} buildHref={(p) => `?page=${p}`} />
-              <span className="font-body text-xs text-slate">(renders null — nothing above this line)</span>
+              <span className="font-body text-xs text-content-2">(renders null — nothing above this line)</span>
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -207,10 +207,10 @@ export default function ComponentGallery() {
       {/* Calculator shell — the hero interaction */}
       <Section tone="muted">
         <Container className="flex flex-col gap-8">
-          <h2 className="font-display text-2xl font-semibold text-ink">
+          <h2 className="font-display text-2xl font-semibold text-content">
             Calculator shell (live demo)
           </h2>
-          <p className="max-w-2xl font-body text-sm text-slate">
+          <p className="max-w-2xl font-body text-sm text-content-2">
             The hero interaction of the site. Drag a slider or edit a number
             — the result panel counts up, the chart redraws, the compliance
             note is always present. There is no loading state here by
@@ -225,7 +225,7 @@ export default function ComponentGallery() {
       <Section>
         <Container className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink">BlogCard</h2>
+            <h2 className="font-display text-2xl font-semibold text-content">BlogCard</h2>
             <div className="grid gap-6 sm:grid-cols-2">
               {sampleBlogPosts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
@@ -234,7 +234,7 @@ export default function ComponentGallery() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink">
+            <h2 className="font-display text-2xl font-semibold text-content">
               LegendCard — published vs. draft
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
@@ -245,7 +245,7 @@ export default function ComponentGallery() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink">
+            <h2 className="font-display text-2xl font-semibold text-content">
               ProductCard — risk levels
             </h2>
             <div className="grid gap-6 sm:grid-cols-3">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SipForm } from "@/components/calculator/SipForm";
-import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
+import { CalculatorShell } from "@/components/calculator/CalculatorShell";
 
 export const metadata: Metadata = {
   title: "SIP Calculator",
@@ -11,10 +10,11 @@ export const metadata: Metadata = {
 
 export default function SipCalculatorPage() {
   return (
-    <Section>
-      <Container>
-        <SipForm />
-      </Container>
-    </Section>
+    <CalculatorShell
+      title="SIP Calculator"
+      description="See what a monthly SIP could be worth at maturity, based on an assumed rate of return you control."
+    >
+      <SipForm />
+    </CalculatorShell>
   );
 }

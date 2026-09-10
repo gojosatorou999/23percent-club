@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Financial Tools",
@@ -35,34 +37,44 @@ const TOOLS = [
 
 export default function ToolsIndexPage() {
   return (
-    <Section>
-      <Container className="flex flex-col gap-10">
-        <header className="flex flex-col gap-3">
-          <h1 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
-            Financial Tools
-          </h1>
-          <p className="max-w-2xl font-body text-base text-slate">
-            Four calculators, one shared engine. Every result is arithmetic
-            on the assumptions you enter — never a fund, AMC, or product
-            recommendation.
-          </p>
-        </header>
+    <>
+      <PageHero
+        title="Financial Tools"
+        intro="Four calculators, one shared engine. Every result is arithmetic on the assumptions you enter — never a fund, AMC, or product recommendation."
+        seam="offWhite"
+      />
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {TOOLS.map((tool) => (
-            <Link key={tool.href} href={tool.href} className="group">
-              <Card className="flex h-full flex-col gap-3 p-6 transition-colors group-hover:border-sapphire">
-                <h2 className="font-display text-xl font-semibold text-ink group-hover:text-sapphire">
-                  {tool.name}
-                </h2>
-                <p className="font-body text-sm leading-relaxed text-slate">
-                  {tool.why}
-                </p>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </Container>
-    </Section>
+      {/* Off-white ground on purpose: white glass needs something to be
+          glass against, and it disappears on a white page. */}
+      <Section tone="muted">
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {TOOLS.map((tool, i) => (
+              <Reveal
+                key={tool.href}
+                index={i}
+                count={TOOLS.length}
+                className="h-full"
+              >
+                <Link href={tool.href} className="group block h-full">
+                  <Card
+                    surface="glass"
+                    lift
+                    className="flex h-full flex-col gap-3 p-6"
+                  >
+                    <h2 className="font-display text-xl font-semibold text-content group-hover:text-accent">
+                      {tool.name}
+                    </h2>
+                    <p className="font-body text-sm leading-relaxed text-content-2">
+                      {tool.why}
+                    </p>
+                  </Card>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    </>
   );
 }

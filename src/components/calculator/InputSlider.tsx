@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { formatINR } from "@/lib/formatters";
+import { SpringSlider } from "@/components/motion/anime/SpringSlider";
 
 interface InputSliderProps {
   label: string;
@@ -11,6 +12,13 @@ interface InputSliderProps {
   max: number;
   step?: number;
   unit?: "₹" | "%" | "years";
+  /**
+   * `onDeep` re-pitches the control for a glass panel on the deep field:
+   * white type, a translucent field, and a track light enough to be seen
+   * against Sapphire. The behaviour below is identical in both tones — only
+   * the palette moves.
+   */
+  tone?: "onLight" | "onDeep";
 }
 
 /**
@@ -26,8 +34,10 @@ export function InputSlider({
   max,
   step = 1,
   unit = "₹",
+  tone = "onLight",
 }: InputSliderProps) {
   const id = useId();
+  const onDeep = tone === "onDeep";
   const isFocused = useRef(false);
 
   // Displayed text is buffered locally, separate from the committed
@@ -88,11 +98,20 @@ export function InputSlider({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <label htmlFor={id} className="font-body text-sm font-medium text-ink">
+        <label
+          htmlFor={id}
+          className={`font-body text-sm font-medium ${onDeep ? "text-white" : "text-content"}`}
+        >
           {label}
         </label>
         <div className="flex items-center gap-1 tabular-nums">
-          {unit === "₹" && <span className="font-body text-sm text-slate">₹</span>}
+          {unit === "₹" && (
+            <span
+              className={`font-body text-sm ${onDeep ? "text-white/90" : "text-content-2"}`}
+            >
+              ₹
+            </span>
+          )}
           <input
             id={id}
             type="number"
@@ -109,27 +128,43 @@ export function InputSlider({
             // found during the Phase 8 mobile-device pass. w-28 (up from
             // w-24) gives the larger glyphs room for an 8-digit value
             // (the lumpsum calculator's max is 10,000,000) without wrapping.
-            className="w-28 rounded-md border border-border bg-white px-2 py-1 text-right font-body text-base text-ink focus-visible:outline-2 focus-visible:outline-bright-blue"
+            className={`w-28 rounded-md border px-2 py-1 text-right font-body text-base focus-visible:outline-2 ${
+              onDeep
+                ? "border-white/25 bg-white/10 text-white focus-visible:outline-white"
+                : "border-line bg-surface-3 text-content focus-visible:outline-bright-blue"
+            }`}
           />
           {unit !== "₹" && (
-            <span className="font-body text-sm text-slate">
+            <span
+              className={`font-body text-sm ${onDeep ? "text-white/90" : "text-content-2"}`}
+            >
               {unit === "%" ? "%" : "yr"}
             </span>
           )}
         </div>
       </div>
-      <input
-        type="range"
-        aria-label={label}
+      {/*
+        The rail is a <SpringSlider>, not a bare range input: it renders a
+        real range input for the keyboard and for assistive tech, and hands
+        pointer input to a spring-released draggable thumb once anime.js has
+        loaded. If it never loads — reduced motion, a failed chunk — the
+        range input keeps pointer input and this behaves exactly as it did
+        before. `clamp` is still applied on the way out because SpringSlider
+        reports a stepped value and the engine's contract is a clamped one.
+      */}
+      <SpringSlider
+        label={label}
         value={value}
+        onChange={(next) => onChange(clamp(next))}
         min={min}
         max={max}
         step={step}
-        onChange={(e) => onChange(clamp(Number(e.target.value)))}
-        className="h-2 w-full cursor-pointer appearance-none rounded-full bg-border accent-bright-blue"
+        tone={tone}
       />
       {unit === "₹" && (
-        <p className="font-body text-xs text-slate tabular-nums">
+        <p
+          className={`font-body text-xs tabular-nums ${onDeep ? "text-white/90" : "text-content-2"}`}
+        >
           {formatINR(value)}
         </p>
       )}

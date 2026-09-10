@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { calculateStepUpSip } from "@/lib/calculators";
 import { METHODOLOGY } from "@/lib/methodology";
-import { CalculatorLayout } from "./CalculatorLayout";
+import { CalculatorBody } from "./CalculatorBody";
 import { InputSlider } from "./InputSlider";
 import { ResultPanel } from "./ResultPanel";
 import { HowThisIsCalculated } from "./HowThisIsCalculated";
@@ -20,15 +20,19 @@ export function StepUpForm() {
   const trackUsed = useTrackCalculatorUsed("step-up-sip");
 
   const result = useMemo(
-    () => calculateStepUpSip({ monthlyAmount, annualStepUpPct, annualReturnPct, years }),
+    () =>
+      calculateStepUpSip({
+        monthlyAmount,
+        annualStepUpPct,
+        annualReturnPct,
+        years,
+      }),
     [monthlyAmount, annualStepUpPct, annualReturnPct, years],
   );
   const methodology = METHODOLOGY["step-up-sip"];
 
   return (
-    <CalculatorLayout
-      title="Step-up SIP Calculator"
-      description="Increase your SIP by a fixed percentage every year and see how much more that discipline is worth at maturity."
+    <CalculatorBody
       inputs={
         <div onChangeCapture={trackUsed} className="contents">
           <InputSlider
@@ -74,11 +78,18 @@ export function StepUpForm() {
           tiles={[
             { label: "Total invested", value: result.totalInvested },
             { label: "Wealth gained", value: result.wealthGained },
-            { label: "Maturity value", value: result.maturityValue, emphasis: true },
+            {
+              label: "Maturity value",
+              value: result.maturityValue,
+              emphasis: true,
+            },
           ]}
           chart={<GrowthChart series={result.series} />}
         >
-          <HowThisIsCalculated formula={methodology.formula} explanation={methodology.explanation} />
+          <HowThisIsCalculated
+            formula={methodology.formula}
+            explanation={methodology.explanation}
+          />
         </ResultPanel>
       }
       belowFold={

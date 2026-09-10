@@ -1,10 +1,10 @@
 import type { Product, RiskLevel } from "@/lib/types";
 
 const RISK_STYLE: Record<RiskLevel, { label: string; dot: string; text: string }> = {
-  low: { label: "Low risk", dot: "bg-slate", text: "text-slate" },
-  moderate: { label: "Moderate risk", dot: "bg-sapphire", text: "text-sapphire" },
-  high: { label: "High risk", dot: "bg-alert-amber", text: "text-alert-amber-text" },
-  "very-high": { label: "Very high risk", dot: "bg-alert-amber", text: "text-alert-amber-text" },
+  low: { label: "Low risk", dot: "bg-slate", text: "text-content-2" },
+  moderate: { label: "Moderate risk", dot: "bg-sapphire", text: "text-accent" },
+  high: { label: "High risk", dot: "bg-alert-amber", text: "text-amber-text" },
+  "very-high": { label: "Very high risk", dot: "bg-alert-amber", text: "text-amber-text" },
 };
 
 /**
@@ -15,9 +15,9 @@ export function ProductCard({ product }: { product: Product }) {
   const risk = RISK_STYLE[product.riskLevel];
 
   return (
-    <article className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-6">
+    <article className="flex flex-col gap-3 rounded border border-line bg-surface-3 p-6">
       <div className="flex items-center justify-between gap-2">
-        <span className="font-body text-xs font-medium uppercase tracking-wide text-slate">
+        <span className="font-body text-xs font-medium uppercase tracking-wide text-content-2">
           {product.category}
         </span>
         <span className={`inline-flex items-center gap-1.5 font-body text-xs font-medium ${risk.text}`}>
@@ -25,15 +25,15 @@ export function ProductCard({ product }: { product: Product }) {
           {risk.label}
         </span>
       </div>
-      <h3 className="font-display text-lg font-semibold text-ink">{product.name}</h3>
-      <p className="font-body text-sm leading-relaxed text-slate">{product.description}</p>
-      <dl className="grid grid-cols-2 gap-2 border-t border-border pt-3 font-body text-xs text-slate">
+      <h3 className="font-display text-lg font-semibold text-content">{product.name}</h3>
+      <p className="font-body text-sm leading-relaxed text-content-2">{product.description}</p>
+      <dl className="grid grid-cols-2 gap-2 border-t border-line pt-3 font-body text-xs text-content-2">
         <div>
-          <dt className="font-medium text-ink">Liquidity</dt>
+          <dt className="font-medium text-content">Liquidity</dt>
           <dd>{product.liquidity}</dd>
         </div>
         <div>
-          <dt className="font-medium text-ink">Taxation</dt>
+          <dt className="font-medium text-content">Taxation</dt>
           <dd>{product.taxation}</dd>
         </div>
       </dl>

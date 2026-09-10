@@ -9,12 +9,12 @@ export function BlogCta({ teaser, href = "/learn/blog" }: { teaser: string; href
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col items-start gap-2 rounded-2xl border border-border bg-off-white p-6">
-      <p className="font-body text-sm text-ink">{teaser}</p>
+    <div className="flex flex-col items-start gap-2 rounded border border-line bg-surface-2 p-6">
+      <p className="font-body text-sm text-content">{teaser}</p>
       <Link
         href={href}
         onClick={() => trackEvent("tool_cta_clicked", { from: pathname, to: href })}
-        className="font-body text-sm font-medium text-sapphire hover:underline"
+        className="font-body text-sm font-medium text-accent hover:underline"
       >
         Read more on the blog →
       </Link>

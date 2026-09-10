@@ -7,8 +7,8 @@ export function LogoStacked({ className = "" }: { className?: string }) {
       className={`inline-flex flex-col items-center justify-center gap-3 ${className}`}
     >
       <LogoMark className="h-16 w-16" />
-      <span className="font-display text-2xl font-semibold leading-none text-ink">
-        23<span className="text-sapphire">%</span> Club
+      <span className="font-display text-2xl font-semibold leading-none text-content">
+        23<span className="text-accent">%</span> Club
       </span>
     </span>
   );

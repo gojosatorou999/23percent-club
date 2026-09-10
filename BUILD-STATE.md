@@ -483,3 +483,160 @@ rendered routes, 0 broken links across 29 crawled routes, Lighthouse
 remains at zero rows. The legacy-site blocker on Phase 2 is unchanged —
 still nothing findable to port, still not blocking any other phase per
 §0.6/§12 R1.
+
+## Design pass: motion, landing page, and light/dark (2026-09-10)
+
+Not a numbered phase — a design change on top of Gate G8, requested after
+review that the site "looks static." Three pieces, all uncommitted at time
+of writing.
+
+### 1. Light/dark theme, without touching §3.1
+
+The locked Sapphire palette is unchanged. Dark mode works by splitting the
+tokens that had two unrelated jobs: `--color-ink` was both the brand's
+darkest value (deep-field ramp, drawer scrim, the text colour locked against
+Bright Blue on the primary CTA) *and* "the colour body copy happens to be."
+Only the second job flips. New semantic roles — `--color-surface`,
+`--color-surface-2/3`, `--color-content`, `--color-content-2`, `--color-line`,
+`--color-accent`, `--color-on-accent` — carry the theme; every dark value is
+a `color-mix()` of a locked token, so there are no new hex values and the
+dark theme is the same palette under different light.
+
+Migration was mechanical (`bg-white`→`bg-surface-3`, `text-ink`→`text-content`,
+`text-slate`→`text-content-2`, `border-border`→`border-line`,
+`text-sapphire`→`text-accent`) across 39 files, with three classes of
+exception left alone deliberately:
+
+- **White-alpha fills on deep bands** (`bg-white/10`, `border-white/25`). A
+  deep band is dark in both themes; nothing on it flips. A first pass caught
+  these via a `\b` word boundary that also matched `bg-white/10` and had to
+  be reverted.
+- **The primary CTA's locked pair.** `bg-bright-blue text-ink` is 8.24:1;
+  the migration turned it into `text-content`, which in dark mode is
+  near-white on Bright Blue — 2.12:1, the exact AA failure Gate G1 fixed.
+  Now `text-on-accent`, a token that never flips, and named so a future
+  dark-mode pass cannot "helpfully" flip it back.
+- **Scrims and the header gradient** (`bg-ink/60`, `from-ink/75`), which must
+  stay dark in both themes.
+
+`data-theme` on `<html>` is the single source of truth: stamped by an inline
+`<head>` script before first paint (so there is no flash, and no wrong icon
+on a cold load for a dark-mode visitor), read by CSS, written by the toggle.
+The toggle holds no mirrored React state — which glyph shows is a CSS rule on
+`:root[data-theme]`, and `useSyncExternalStore` supplies only `aria-pressed`.
+No stored choice means "follow the system", and keeps following it.
+
+### 2. Landing page
+
+Three thin sections became eight: hero, principles marquee, a pinned
+scroll sequence, derived counts, tools, pillars, writing, closing CTA.
+
+Every number on the page is derived, never asserted — counts come from the
+content directory at build time, the projection from the same `calculateSip`
+the calculators use. The one figure that is a zero ("0 products recommended")
+is the site's boundary and stays in the row for that reason. `compliance`
+stays at 0 violations across 30 routes.
+
+`<CompoundingSequence>` is the centrepiece: a sticky stage pinned for four
+screens while one variable `t` drives the curve, both counters, the crossover
+marker, and four crossfading captions. The crossover year (11) and the
+final growth share (84%) are computed from the series, not written into the
+copy, so the sentence and the chart cannot disagree.
+
+Three things about it were wrong on first build and are worth not repeating:
+
+- **The y-axis was fixed to the year-25 value**, which left the first half of
+  the sequence a flat line on the baseline — two full beats of watching
+  nothing. It now rescales to the visible data with the current maximum
+  printed at the top gridline. A rescaling axis *without* that label would be
+  the dishonest version.
+- **`overflow: hidden` on `.deep-field` breaks `position: sticky`** inside it.
+  Hence `Section`'s `containsSticky`, which is load-bearing, not cosmetic.
+  Safe because `<AuroraField>` already clips its own layers.
+- **Parallax on adjacent grid cards reads as a broken grid**, not as depth.
+  The drift moved to the grid as a whole.
+
+### 3. Motion layer
+
+One shared scroll driver (`scrollDriver.ts`) — a single passive listener and
+one rAF for every subscriber, rather than N of each all calling
+`getBoundingClientRect()` and interleaving reads with each other's writes.
+
+It needed `requestFrame()`: the driver ticks once per scroll event, which is
+right for a subscriber mapping scroll straight to a style but wrong for one
+that *smooths* toward a target. The browser stops sending scroll events the
+instant the wheel stops, so the curve froze several frames short of its
+target every time you stopped scrolling.
+
+Reveals stay transform-only (the contrast note in globals.css still holds).
+The pinned steps are the one place text fades, and only because inactive
+steps are `visibility: hidden` — nothing mid-fade is ever what a reader is
+being asked to read. The animated captions are `aria-hidden` with an
+`sr-only` list carrying all four beats in order.
+
+### Verification
+
+`lint`, `typecheck`, 82/82 unit, `validate:content`, `compliance` (30 routes,
+0 violations), `check:links` (29 routes, 0 broken), 121/121 Playwright e2e +
+a11y across chromium/firefox/webkit/ios-safari/android-chrome (6 intentional
+touch-only skips) — all green.
+
+Three test changes, all justified rather than loosened:
+
+- A real a11y defect found by axe and fixed in the page, not the test: the
+  stats row was a `<dl>` with reveal wrappers inside it. A `<dl>` may only
+  directly contain `<dt>`/`<dd>` groups, and `<dt>` must precede `<dd>` —
+  which fights a stat tile whose whole point is the figure reading first.
+  It is a `<ul>` now.
+- Two home-page assertions were scoped to the hero section. The landing page
+  now legitimately has a second CTA and a second projected figure, so the
+  unscoped locators matched two elements. That is correct page content, and
+  the assertions were always about the hero specifically.
+- The WebKit branch of the keyboard-only test asserted that range inputs are
+  excluded from the Tab order. WebKit 26.5 includes them — verified against a
+  bare `<input type="number"><input type="range">` with none of this codebase
+  loaded, so it is browser drift, not a regression. The test no longer pins
+  one engine's answer.
+
+### Performance — a real regression on Home, and what could not be measured
+
+**`npm run lighthouse` cannot run in this environment.** `lhci` dies with
+`EPERM` in chrome-launcher's Windows temp cleanup before writing any report,
+on the first URL, regardless of `TMP`/`TEMP`. Pre-existing and unrelated to
+this work, but it means the ≥90 gate was **not** verified here and must be
+re-run on CI or Vercel. `npm run check:links` has the same shape of problem
+(`spawn npm` ENOENT on Windows); it passes when a server is already running
+on port 3000, which is how it was run above.
+
+Measured instead with Lighthouse driven through a Playwright-launched Chrome.
+That harness reads systematically lower than `lhci` — committed HEAD scores
+84 on Home under it versus the 91 recorded at Gate G7 — so its numbers are
+**comparative only, not gate numbers**. Before/after on the same harness,
+same machine, median of 3–5 runs, against the pre-redesign HEAD:
+
+| Home | perf | TBT | LCP |
+|---|---|---|---|
+| committed HEAD (plain, pre-redesign) | 84 | 376ms | 3204ms |
+| first build of this pass | 75 | 553ms | 3604ms |
+| after the fixes below | 79 | 427ms | 3575ms |
+
+Two fixes recovered most of it:
+
+- **`will-change: transform` removed from `[data-reveal]`, `.drift`, and the
+  idle state of `.tilt`.** It reads as the obvious optimisation and was the
+  opposite here: every reveal is hidden from first paint, so the hint
+  promoted ~20 elements to their own compositor layer immediately and held
+  them there, for an animation browsers auto-promote the moment a transform
+  starts. Kept only on `.parallax-layer` and `.marquee-track`, which animate
+  continuously — the textbook correct use.
+- **Aurora reduced from four bands to two on Home** (hero and the sequence).
+  The pillars and closing bands keep the deep ramp without the parallax light.
+
+The remaining ~5-point gap is the honest cost of going from three plain
+sections to a cinematic landing page with a scroll-driven chart, and part of
+it belongs to the previous session's deep-field/glass work rather than to
+this pass — the baseline above is the plain pre-redesign site, which had no
+deep fields or aurora at all.
+
+Accessibility, Best Practices and SEO measured **100 on all five key routes**,
+and **CLS is 0 everywhere** despite the added motion.

@@ -77,9 +77,9 @@ export default function GrowthChartImpl({ series }: { series: YearPoint[] }) {
         </ResponsiveContainer>
       </div>
       {final && (
-        <p className="font-body text-sm text-slate">
+        <p className="font-body text-sm text-content-2">
           By {formatYears(final.year)}, projected value reaches{" "}
-          <span className="font-medium text-ink tabular-nums">
+          <span className="font-medium text-content tabular-nums">
             {formatINR(final.value)}
           </span>
           .

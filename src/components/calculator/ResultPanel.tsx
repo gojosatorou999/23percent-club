@@ -27,7 +27,7 @@ export function ResultPanel({
   children?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-6 rounded-2xl border border-border bg-off-white p-6 sm:p-8">
+    <div className="glass flex flex-col gap-6 rounded p-6 sm:p-8">
       <HeartbeatPulse className="h-6 w-full" />
 
       <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -49,14 +49,14 @@ function ResultTileItem({ tile }: { tile: ResultTile }) {
 
   return (
     <div className="flex flex-col gap-1">
-      <dt className="font-body text-xs font-medium uppercase tracking-wide text-slate">
+      <dt className="font-body text-xs font-medium uppercase tracking-wide text-content-2">
         {tile.label}
       </dt>
       <dd
         className={`tabular-nums font-display ${
           tile.emphasis
-            ? "text-2xl font-semibold text-sapphire sm:text-3xl"
-            : "text-xl font-medium text-ink"
+            ? "text-2xl font-semibold text-accent sm:text-3xl"
+            : "text-xl font-medium text-content"
         }`}
       >
         {formatINR(animated)}

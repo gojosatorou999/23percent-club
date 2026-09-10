@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { InflationForm } from "@/components/calculator/InflationForm";
-import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
+import { CalculatorShell } from "@/components/calculator/CalculatorShell";
 
 export const metadata: Metadata = {
   title: "Inflation Calculator",
@@ -11,10 +10,11 @@ export const metadata: Metadata = {
 
 export default function InflationCalculatorPage() {
   return (
-    <Section>
-      <Container>
-        <InflationForm />
-      </Container>
-    </Section>
+    <CalculatorShell
+      title="Inflation Calculator"
+      description="See what today's ₹ will actually be able to buy in the future — and why a return that doesn't beat inflation is a real loss."
+    >
+      <InflationForm />
+    </CalculatorShell>
   );
 }

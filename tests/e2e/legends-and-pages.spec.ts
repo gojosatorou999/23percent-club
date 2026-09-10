@@ -36,14 +36,20 @@ test.describe("Legend page", () => {
 });
 
 test.describe("Home page", () => {
+  // Scoped to the first section on purpose. The landing page now carries a
+  // closing CTA and a second projected figure of its own, so an unscoped
+  // "Explore the tools" or "Assumed return..." matches more than one element
+  // — which is correct page content, not a regression. These assertions are
+  // about the hero specifically, so they say so.
   test("hero calculator is live and links resolve to real pages", async ({ page }) => {
     await page.goto("/");
+    const hero = page.locator("section").first();
     await expect(page.getByRole("heading", { name: /We don't manage your money/ })).toBeVisible();
 
-    const toolsLink = page.getByRole("link", { name: "Explore the tools" });
+    const toolsLink = hero.getByRole("link", { name: "Explore the tools" });
     await expect(toolsLink).toHaveAttribute("href", "/tools");
 
-    const learnLink = page.getByRole("link", { name: "Start learning" });
+    const learnLink = hero.getByRole("link", { name: "Start learning" });
     await expect(learnLink).toHaveAttribute("href", "/learn");
 
     // Latest post section should link to a real, resolvable post.
@@ -53,9 +59,10 @@ test.describe("Home page", () => {
 
   test("hero slider updates the projected value", async ({ page }) => {
     await page.goto("/");
-    const slider = page.getByRole("slider", { name: "Monthly investment" });
+    const hero = page.locator("section").first();
+    const slider = hero.getByRole("slider", { name: "Monthly investment" });
     await slider.fill("50000");
-    await expect(page.getByText("Assumed return is illustrative only")).toBeVisible();
+    await expect(hero.getByText("Assumed return is illustrative only")).toBeVisible();
   });
 
   test("zero critical axe violations @a11y", async ({ page }) => {

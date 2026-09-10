@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { calculateSip } from "@/lib/calculators";
 import { METHODOLOGY } from "@/lib/methodology";
-import { CalculatorLayout } from "./CalculatorLayout";
+import { CalculatorBody } from "./CalculatorBody";
 import { InputSlider } from "./InputSlider";
 import { ResultPanel } from "./ResultPanel";
 import { HowThisIsCalculated } from "./HowThisIsCalculated";
@@ -24,9 +24,7 @@ export function SipForm() {
   const methodology = METHODOLOGY.sip;
 
   return (
-    <CalculatorLayout
-      title="SIP Calculator"
-      description="See what a monthly SIP could be worth at maturity, based on an assumed rate of return you control."
+    <CalculatorBody
       inputs={
         <div onChangeCapture={trackUsed} className="contents">
           <InputSlider
@@ -63,11 +61,18 @@ export function SipForm() {
           tiles={[
             { label: "Total invested", value: result.totalInvested },
             { label: "Wealth gained", value: result.wealthGained },
-            { label: "Maturity value", value: result.maturityValue, emphasis: true },
+            {
+              label: "Maturity value",
+              value: result.maturityValue,
+              emphasis: true,
+            },
           ]}
           chart={<GrowthChart series={result.series} />}
         >
-          <HowThisIsCalculated formula={methodology.formula} explanation={methodology.explanation} />
+          <HowThisIsCalculated
+            formula={methodology.formula}
+            explanation={methodology.explanation}
+          />
         </ResultPanel>
       }
       belowFold={

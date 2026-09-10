@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { calculateInflation } from "@/lib/calculators";
 import { METHODOLOGY } from "@/lib/methodology";
 import { formatPercent } from "@/lib/formatters";
-import { CalculatorLayout } from "./CalculatorLayout";
+import { CalculatorBody } from "./CalculatorBody";
 import { InputSlider } from "./InputSlider";
 import { ResultPanel } from "./ResultPanel";
 import { HowThisIsCalculated } from "./HowThisIsCalculated";
@@ -25,9 +25,7 @@ export function InflationForm() {
   const methodology = METHODOLOGY.inflation;
 
   return (
-    <CalculatorLayout
-      title="Inflation Calculator"
-      description="See what today's ₹ will actually be able to buy in the future — and why a return that doesn't beat inflation is a real loss."
+    <CalculatorBody
       inputs={
         <div onChangeCapture={trackUsed} className="contents">
           <InputSlider
@@ -64,15 +62,23 @@ export function InflationForm() {
           tiles={[
             { label: "Today's amount", value: currentAmount },
             { label: "Real value in the future", value: result.realValue },
-            { label: "Future cost of the same basket", value: result.futureCost, emphasis: true },
+            {
+              label: "Future cost of the same basket",
+              value: result.futureCost,
+              emphasis: true,
+            },
           ]}
           chart={<GrowthChart series={result.series} />}
         >
-          <p className="font-body text-sm text-ink">
-            That&apos;s a {formatPercent(result.erosionPct)} loss in purchasing power over{" "}
-            {years} {years === 1 ? "year" : "years"} at this inflation rate.
+          <p className="font-body text-sm text-content">
+            That&apos;s a {formatPercent(result.erosionPct)} loss in purchasing
+            power over {years} {years === 1 ? "year" : "years"} at this
+            inflation rate.
           </p>
-          <HowThisIsCalculated formula={methodology.formula} explanation={methodology.explanation} />
+          <HowThisIsCalculated
+            formula={methodology.formula}
+            explanation={methodology.explanation}
+          />
         </ResultPanel>
       }
       belowFold={

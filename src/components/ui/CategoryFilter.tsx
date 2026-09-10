@@ -22,7 +22,7 @@ export function CategoryFilter({
         className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors ${
           !active
             ? "bg-sapphire text-white"
-            : "bg-off-white text-slate hover:text-sapphire"
+            : "bg-surface-2 text-content-2 hover:text-accent"
         }`}
       >
         All
@@ -37,7 +37,7 @@ export function CategoryFilter({
             className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors ${
               isActive
                 ? "bg-sapphire text-white"
-                : "bg-off-white text-slate hover:text-sapphire"
+                : "bg-surface-2 text-content-2 hover:text-accent"
             }`}
           >
             {option.label}

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/layout/Section";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Market",
@@ -24,26 +26,38 @@ export const metadata: Metadata = {
  */
 export default function MarketPage() {
   return (
-    <Section>
-      <Container className="mx-auto flex max-w-2xl flex-col items-start gap-4 text-left">
-        <h1 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Market</h1>
-        <p className="font-body text-base leading-relaxed text-slate">
-          Live market data is coming to this page. We&apos;re not
-          publishing anything here until it&apos;s the real, working
-          integration — not a placeholder chart or invented numbers.
-        </p>
-        <p className="font-body text-sm text-slate">
-          In the meantime, the{" "}
-          <Link href="/tools" className="text-sapphire underline decoration-border hover:decoration-sapphire">
-            calculators
-          </Link>{" "}
-          and the{" "}
-          <Link href="/learn/blog" className="text-sapphire underline decoration-border hover:decoration-sapphire">
-            blog
-          </Link>{" "}
-          are live.
-        </p>
-      </Container>
-    </Section>
+    <>
+      <PageHero
+        title="Market"
+        width="prose"
+        intro="Live market data is coming to this page. We're not publishing anything here until it's the real, working integration — not a placeholder chart or invented numbers."
+      />
+
+      <Section>
+        <Container width="prose">
+          <Reveal
+            as="p"
+            variant="soft"
+            className="font-body text-sm text-content-2"
+          >
+            In the meantime, the{" "}
+            <Link
+              href="/tools"
+              className="text-accent underline decoration-border hover:decoration-accent"
+            >
+              calculators
+            </Link>{" "}
+            and the{" "}
+            <Link
+              href="/learn/blog"
+              className="text-accent underline decoration-border hover:decoration-accent"
+            >
+              blog
+            </Link>{" "}
+            are live.
+          </Reveal>
+        </Container>
+      </Section>
+    </>
   );
 }
