@@ -1,7 +1,7 @@
 # BUILD-STATE
 
-Last updated: 2026-09-01 by claude-sonnet-5 session
-Current phase: 9 (2 still blocked — see Blockers)
+Last updated: 2026-09-10 by antigravity session
+Current phase: 9 — complete pending Vercel domain connection (founder action)
 Branch: main
 
 | Phase | Name | Status | Gate passed | Commit |
@@ -14,8 +14,9 @@ Branch: main
 | 5 | Money Basics | ✅ | 2026-08-31 | 15c24ce |
 | 6 | Legends, Home, About, Disclosures | ✅ | 2026-08-31 | 94c38a4 |
 | 7 | SEO, Performance, Analytics | ✅ | 2026-08-31 | a644812 |
-| 8 | Full QA & Compliance Audit | ✅ | 2026-09-01 | (this commit) |
-| 9 | Deploy & Handoff | ⬜ | | |
+| 8 | Full QA & Compliance Audit | ✅ | 2026-09-01 | 9e9ac85 |
+| Design pass | Light/dark, landing, motion | ✅ | 2026-09-10 | 0061cc9 |
+| 9 | Deploy & Handoff | 🟡 | | pending domain |
 
 ## Blockers
 
@@ -640,3 +641,54 @@ deep fields or aurora at all.
 
 Accessibility, Best Practices and SEO measured **100 on all five key routes**,
 and **CLS is 0 everywhere** despite the added motion.
+
+## Phase 9 — Deploy & Handoff (2026-09-10)
+
+**Code side: done.** `npm run verify` exits 0 (lint, typecheck, 82/82 unit tests,
+clean production build of 34 static routes). `npm run validate:content` and
+`npm run compliance` (30 rendered routes, 0 violations) both green.
+
+Design pass committed (`0061cc9`): light/dark theme, cinematic landing page
+(8 sections, scroll-driven compounding sequence, motion layer), site search,
+theme toggle, floating actions bar. All 82 unit tests still green; build still
+clean after the design pass.
+
+**Remaining steps are founder/infrastructure actions, not code:**
+
+1. **Vercel project** — connect the GitHub repo to Vercel (vercel.com/new → import
+   from GitHub → select this repo). Framework is auto-detected as Next.js.
+
+2. **Environment variables** — set in the Vercel dashboard (Settings → Environment
+   Variables), never committed to the repo:
+   - `NEXT_PUBLIC_SITE_URL` = `https://23percentclub.com` (your production domain)
+   - `NEXT_PUBLIC_ANALYTICS_ENABLED` = `true`
+   - `NEXT_PUBLIC_ANALYTICS_DOMAIN` = `23percentclub.com` (the domain in Plausible)
+   - `NEXT_PUBLIC_PLAUSIBLE_URL` = `https://plausible.io` (or your self-hosted URL)
+
+3. **Custom domain** — in Vercel dashboard, go to Settings → Domains → Add Domain →
+   enter `23percentclub.com`. Follow the DNS instructions (add Vercel's A record and
+   CNAME at your registrar). Vercel provisions HTTPS automatically.
+
+4. **Preview deployments** — enabled by default on Vercel. Every PR gets a preview
+   URL so content changes can be reviewed before merge. No action required.
+
+5. **Post-deploy audit** — once the domain is live, run:
+   ```
+   npm run audit:full
+   ```
+   with `NEXT_PUBLIC_SITE_URL` pointing at production. This re-runs the Lighthouse
+   suite against the real CDN rather than a local dev server.
+
+6. **Search Console** — submit `https://23percentclub.com/sitemap.xml` via
+   Google Search Console (search.google.com/search-console). The sitemap has 27 URLs.
+   Verification is easiest via the "HTML tag" method — paste the meta tag into
+   `src/app/layout.tsx`'s metadata object under the `verification` key (Next.js
+   supports this natively, no manual tag insertion needed).
+
+7. **Test post** — follow `CONTENT-GUIDE.md §2` to publish a test blog post via PR,
+   verify it appears on the preview deployment, and merge. This is the Gate G9
+   definition-of-done.
+
+**Lighthouse cannot be re-run locally on this machine** (LHCI dies with EPERM in
+Windows temp cleanup — pre-existing, unrelated to this codebase). Run it on CI or
+against the Vercel production URL once the domain is connected.
