@@ -16,7 +16,7 @@ export function BlogCta({ teaser, href = "/learn/blog" }: { teaser: string; href
         onClick={() => trackEvent("tool_cta_clicked", { from: pathname, to: href })}
         className="font-body text-sm font-medium text-accent hover:underline"
       >
-        Read more on the blog →
+        Read more on the blog
       </Link>
     </div>
   );

@@ -123,6 +123,7 @@ export interface BlogFrontmatter {
   title: string;
   slug: string;
   date: string;
+  updatedAt?: string;
   category: BlogCategory;
   readTime: number;
   author: string;
@@ -153,5 +154,6 @@ export interface MoneyBasicsFrontmatter {
   title: string;
   topic: MoneyBasicsTopicSlug;
   excerpt: string;
+  updatedAt?: string;
   sources: string[];
 }

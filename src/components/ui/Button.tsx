@@ -27,7 +27,7 @@ const VARIANT = {
 } as const;
 
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-body text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded px-6 py-3 font-body text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50";
 
 type Variant = keyof typeof VARIANT;
 

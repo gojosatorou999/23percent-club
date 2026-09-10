@@ -237,7 +237,7 @@ export default function Home() {
                 href="/tools"
                 className="font-body text-sm font-medium text-accent hover:underline"
               >
-                See all tools →
+                See all tools
               </Link>
             </Reveal>
           </div>
@@ -375,7 +375,7 @@ export default function Home() {
                 href="/learn/blog"
                 className="font-body text-sm font-medium text-accent hover:underline"
               >
-                View all posts →
+                View all posts
               </Link>
             </Reveal>
 
@@ -416,7 +416,7 @@ export default function Home() {
                     href="/legends"
                     className="font-body text-sm font-medium text-accent hover:underline"
                   >
-                    All legends →
+                    All legends
                   </Link>
                 </div>
               </Reveal>
@@ -451,13 +451,13 @@ export default function Home() {
             <Reveal index={2} className="flex flex-wrap gap-3">
               <Link
                 href="/tools/sip-calculator"
-                className="glow-cta inline-flex items-center justify-center rounded-full bg-bright-blue px-6 py-3 font-body text-sm font-medium text-on-accent transition-all duration-300 hover:opacity-90"
+                className="glow-cta inline-flex items-center justify-center rounded-md bg-bright-blue px-6 py-3 font-body text-sm font-medium text-on-accent transition-all duration-300 hover:opacity-90"
               >
                 Open the SIP Calculator
               </Link>
               <Link
                 href="/learn"
-                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3 font-body text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
+                className="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 font-body text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
               >
                 Browse the lessons
               </Link>

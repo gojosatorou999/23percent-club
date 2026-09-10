@@ -70,7 +70,7 @@ export function FloatingActions() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2 sm:bottom-6 sm:right-6">
+    <div data-floating-actions className="pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2 sm:bottom-6 sm:right-6">
       {/*
         `inert` removes the button from tab order and from AT when not
         visible. `aria-hidden` suppresses the announcement. `opacity-0

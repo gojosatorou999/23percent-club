@@ -34,6 +34,7 @@ export const blogSchema = z.object({
   title: z.string().min(1),
   slug: z.string().min(1),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "date must be YYYY-MM-DD"),
+  updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "updatedAt must be YYYY-MM-DD").optional(),
   category: z.enum(BLOG_CATEGORIES),
   readTime: z.number().int().positive(),
   author: z.string().min(1),
@@ -59,6 +60,7 @@ export const moneyBasicsSchema = z.object({
   title: z.string().min(1),
   topic: z.enum(MONEY_BASICS_TOPICS),
   excerpt: z.string().max(200),
+  updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "updatedAt must be YYYY-MM-DD").optional(),
   sources: z.array(z.string()).default([]),
 });
 

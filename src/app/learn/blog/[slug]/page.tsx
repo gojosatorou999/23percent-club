@@ -101,6 +101,18 @@ export default async function BlogPostPage({
             <p className="font-body text-sm text-white/80">
               {frontmatter.author} · {frontmatter.readTime} min read
             </p>
+            {frontmatter.updatedAt && (
+              <p className="font-body text-xs text-white/55">
+                Last updated{" "}
+                <time dateTime={frontmatter.updatedAt}>
+                  {new Date(frontmatter.updatedAt).toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </time>
+              </p>
+            )}
           </div>
         </Container>
       </Section>

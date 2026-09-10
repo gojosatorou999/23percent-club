@@ -19,7 +19,7 @@ export function CategoryFilter({
       <Link
         href={buildHref(undefined)}
         aria-current={!active ? "true" : undefined}
-        className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors ${
+        className={`rounded px-4 py-1.5 font-body text-sm transition-colors ${
           !active
             ? "bg-sapphire text-white"
             : "bg-surface-2 text-content-2 hover:text-accent"
@@ -34,7 +34,7 @@ export function CategoryFilter({
             key={option.slug}
             href={buildHref(option.slug)}
             aria-current={isActive ? "true" : undefined}
-            className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors ${
+            className={`rounded px-4 py-1.5 font-body text-sm transition-colors ${
               isActive
                 ? "bg-sapphire text-white"
                 : "bg-surface-2 text-content-2 hover:text-accent"

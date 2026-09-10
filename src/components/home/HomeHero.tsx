@@ -97,7 +97,7 @@ export function HomeHero() {
           href="/tools/sip-calculator"
           className="mb-4 mt-4 inline-block font-body text-sm font-medium text-bright-blue underline decoration-transparent underline-offset-4 transition-colors hover:decoration-current"
         >
-          Open the full SIP Calculator →
+          Open the full SIP Calculator
         </Link>
         <ComplianceNote tone="onDeep" />
       </div>

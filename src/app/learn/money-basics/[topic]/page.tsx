@@ -38,7 +38,15 @@ export default async function MoneyBasicsTopicPage({
 
   return (
     <>
-      <PageHero title={frontmatter.title} width="prose" />
+      <PageHero
+        title={frontmatter.title}
+        width="prose"
+        intro={
+          frontmatter.updatedAt
+            ? `Last updated: ${new Date(frontmatter.updatedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`
+            : undefined
+        }
+      />
 
       <Section>
         <Container width="prose">

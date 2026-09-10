@@ -4,6 +4,7 @@ import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import { Callout } from "./Callout";
 import { CalculatorEmbed } from "./CalculatorEmbed";
 import { SourceCitation } from "@/components/ui/SourceCitation";
+import { CopyableCode } from "./CopyableCode";
 
 /**
  * Prose typography for post bodies — matches the Sapphire Blue type
@@ -43,8 +44,13 @@ export const mdxComponents: MDXComponents = {
   blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote className="my-6 border-l-2 border-accent pl-5 font-body text-base italic leading-relaxed text-content-2" {...props} />
   ),
+  // Inline code — no copy button, just syntax highlighting.
   code: (props: HTMLAttributes<HTMLElement>) => (
     <code className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-accent" {...props} />
+  ),
+  // Block code — wrapped in CopyableCode for the copy button.
+  pre: (props: HTMLAttributes<HTMLPreElement>) => (
+    <CopyableCode {...props} />
   ),
   hr: () => <hr className="my-10 border-line" />,
   Callout,

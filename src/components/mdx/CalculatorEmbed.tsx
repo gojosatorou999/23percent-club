@@ -28,7 +28,7 @@ export function CalculatorEmbed({ tool }: { tool: Methodology["slug"] }) {
       className="group my-6 flex items-center justify-between gap-4 rounded border border-accent bg-surface-2 px-5 py-4 no-underline transition-colors hover:bg-surface-3"
     >
       <span className="font-body text-sm font-medium text-content">
-        Try the {methodology.name} →
+        Try the {methodology.name}
       </span>
       <span className="font-body text-xs text-content-2 group-hover:text-accent">
         Free, no signup

@@ -40,5 +40,5 @@ export function ScrollProgress() {
     });
   }, []);
 
-  return <div ref={barRef} aria-hidden="true" className="scroll-progress" />;
+  return <div ref={barRef} data-scroll-progress aria-hidden="true" className="scroll-progress" />;
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
+import { Suspense } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PlausibleScript } from "@/components/analytics/PlausibleScript";
@@ -7,6 +8,8 @@ import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { RouteTransition } from "@/components/motion/RouteTransition";
 import { FloatingActions } from "@/components/layout/FloatingActions";
+import { CookieBanner } from "@/components/layout/CookieBanner";
+import { UtmCapture } from "@/components/analytics/UtmCapture";
 import { THEME_INIT_SCRIPT } from "@/components/theme/theme-script";
 import { siteUrl } from "@/lib/seo";
 import { buildSearchIndex } from "@/lib/search-index";
@@ -108,7 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ScrollProgress />
         <a
           href="#page-content"
-          className="sr-only rounded-full px-5 py-3 font-body text-sm font-medium focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-surface-3 focus:text-accent focus:shadow-lg"
+          className="sr-only rounded px-5 py-3 font-body text-sm font-medium focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-surface-3 focus:text-accent focus:outline-2 focus:outline-accent"
         >
           Skip to content
         </a>
@@ -127,6 +130,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <FloatingActions />
+        <CookieBanner />
+        {/*
+          UtmCapture reads searchParams which requires Suspense in the
+          App Router — the fallback is null because this component has no
+          visual output, it only writes to sessionStorage.
+        */}
+        <Suspense fallback={null}>
+          <UtmCapture />
+        </Suspense>
       </body>
     </html>
   );

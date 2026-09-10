@@ -40,7 +40,7 @@ export default function LearnHubPage() {
                 href="/learn/blog"
                 className="font-body text-sm font-medium text-accent hover:underline"
               >
-                View all posts →
+                View all posts
               </Link>
             </Reveal>
             <div className="grid gap-6 sm:grid-cols-3">
@@ -69,7 +69,7 @@ export default function LearnHubPage() {
                 href="/learn/money-basics"
                 className="font-body text-sm font-medium text-accent hover:underline"
               >
-                View all topics →
+                View all topics
               </Link>
             </Reveal>
             <div className="grid gap-4 sm:grid-cols-5">
