@@ -56,6 +56,13 @@ export function SmoothScroll() {
   return null;
 }
 
+/** Scroll to an element or the top, through Lenis when it is running. */
+export function scrollToTarget(target: number | HTMLElement = 0) {
+  if (window.__lenis) window.__lenis.scrollTo(target, { offset: typeof target === "number" ? 0 : -96 });
+  else if (typeof target === "number") window.scrollTo({ top: target, behavior: "smooth" });
+  else target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 /** Lock page scroll while a dialog or sheet is open (Lenis + native, iOS-safe). */
 export function lockScroll(locked: boolean) {
   const root = document.documentElement;
