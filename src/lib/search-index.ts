@@ -1,5 +1,6 @@
 import { TOOLS } from "@/content/tools-meta";
 import { MODULES } from "@/content/school-outline";
+import { GLOSSARY } from "@/content/glossary";
 import type { SearchItem } from "./search-types";
 
 const PAGES: SearchItem[] = [
@@ -36,5 +37,6 @@ export function buildSearchIndex(more: SearchItem[] = []): SearchItem[] {
   const lessons: SearchItem[] = MODULES.flatMap((m) =>
     m.lessons.map((l) => ({ kind: "Lesson" as const, title: l.title, href: `/learn/${m.slug}/${l.slug}`, text: m.title })),
   );
-  return [...PAGES, ...tools, ...modules, ...lessons, ...more, ...extras.flatMap((f) => f())];
+  const terms: SearchItem[] = GLOSSARY.map((t) => ({ kind: "Term", title: t.term, href: t.href ?? "/universe/glossary", text: t.def }));
+  return [...PAGES, ...tools, ...modules, ...lessons, ...terms, ...more, ...extras.flatMap((f) => f())];
 }

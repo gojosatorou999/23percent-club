@@ -171,6 +171,7 @@ html {
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   font-synthesis: none;
+  font-variant-emoji: text;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg);
@@ -714,7 +715,8 @@ input[type="number"] {
   max-width: 68ch;
 }
 
-.prose > * + * {
+.prose > * + *,
+.prose section > * + * {
   margin-top: 1.15em;
 }
 
