@@ -33,8 +33,8 @@ export function ProgressRing({
           stroke={color}
           strokeWidth={stroke}
           strokeLinecap="round"
-          strokeDasharray={c}
-          strokeDashoffset={c * (1 - v)}
+          strokeDasharray={Math.round(c * 100) / 100}
+          strokeDashoffset={Math.round(c * (1 - v) * 100) / 100}
           style={{ transition: "stroke-dashoffset 0.9s cubic-bezier(0.16,1,0.3,1)" }}
         />
       </svg>

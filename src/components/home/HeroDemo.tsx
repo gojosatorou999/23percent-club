@@ -9,7 +9,8 @@ import { ProgressRing } from "@/components/ui/ProgressRing";
 function areaPath(values: number[], w: number, h: number, max: number) {
   if (!values.length) return { line: "", area: "" };
   const step = w / Math.max(1, values.length - 1);
-  const pts = values.map((v, i) => [i * step, h - (v / max) * h] as const);
+  const r2 = (n: number) => Math.round(n * 100) / 100;
+  const pts = values.map((v, i) => [r2(i * step), r2(h - (v / max) * h)] as const);
   let d = `M ${pts[0]![0]} ${pts[0]![1]}`;
   for (let i = 1; i < pts.length; i++) {
     const [x0, y0] = pts[i - 1]!;
