@@ -1,77 +1,89 @@
 import Link from "next/link";
-import { SEBI_DISCLAIMER } from "@/lib/compliance";
-import { LogoHorizontal } from "@/components/brand/LogoHorizontal";
-import { Container } from "./Container";
+import { Logo } from "@/components/brand/Logo";
 
-const FOOTER_LINKS = [
-  { label: "Tools", href: "/tools" },
-  { label: "Learn", href: "/learn" },
-  { label: "Legends", href: "/legends" },
-  { label: "Market", href: "/market" },
-  { label: "About", href: "/about" },
-  { label: "Disclosures", href: "/disclosures" },
+const COLS = [
+  {
+    title: "Learn",
+    links: [
+      ["/learn", "23 School of Finance"],
+      ["/universe", "Universe"],
+      ["/universe/glossary", "Glossary"],
+      ["/insights", "Insights"],
+      ["/junior", "Junior"],
+      ["/events", "Events and live"],
+    ],
+  },
+  {
+    title: "Tools",
+    links: [
+      ["/tools/sip-calculator", "SIP calculator"],
+      ["/tools/goal-planner", "Goal planner"],
+      ["/tools/retirement-calculator", "Retirement"],
+      ["/tools/income-tax-calculator", "Income tax"],
+      ["/tools/emi-calculator", "EMI calculator"],
+      ["/tools", "All tools"],
+    ],
+  },
+  {
+    title: "Know yourself",
+    links: [
+      ["/know-yourself/personality", "Investor personality"],
+      ["/know-yourself/health", "Financial health check"],
+      ["/tax", "Tax saving maximizer"],
+      ["/dashboard", "Your dashboard"],
+    ],
+  },
+  {
+    title: "Club",
+    links: [
+      ["/about", "About"],
+      ["/faq", "FAQ"],
+      ["/disclosures", "Disclosures"],
+      ["/privacy", "Privacy"],
+      ["/terms", "Terms"],
+    ],
+  },
 ] as const;
 
-const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "/legal/privacy" },
-  { label: "Terms of Service", href: "/legal/tos" },
-] as const;
-
-/**
- * The closing deep-field band. AuroraField removed — the gradient itself
- * is atmosphere enough; a radial bloom on top of it was the one place on
- * the site that earned the "radial orb" label.
- */
 export function Footer() {
   return (
-    <footer className="deep-field deep-field-quiet on-deep relative">
-      <Container className="relative z-10 flex flex-col gap-12 py-16 sm:py-20">
-        <p className="max-w-3xl font-display text-3xl font-semibold leading-[1.15] tracking-tight text-white text-glow-soft sm:text-4xl">
-          We don&apos;t manage your money.{" "}
-          <span className="text-bright-blue">
-            We teach you how to manage it.
-          </span>
-        </p>
-
-        <div className="hairline hairline-deep" />
-
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-col gap-3">
-            <LogoHorizontal tone="light" />
-            <p className="max-w-xs font-body text-sm text-white/80">
-              Learn · Invest · Grow · Compound
+    <footer className="relative border-t border-line bg-surface pb-tabbar">
+      <div className="wrap py-14 sm:py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+          <div>
+            <Logo />
+            <p className="mt-5 max-w-sm font-display text-[1.35rem] font-semibold leading-snug tracking-tight">
+              We don&apos;t manage your money. We teach you how to manage it.
             </p>
+            <p className="mt-4 max-w-sm text-sm text-ink-3">Learn, invest, grow and compound, one decision at a time.</p>
           </div>
-          <nav aria-label="Footer" className="flex flex-col gap-6">
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
-              {FOOTER_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-body text-sm text-white/75 transition-colors hover:text-bright-blue"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {LEGAL_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-body text-xs text-white/50 transition-colors hover:text-white/80"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            {COLS.map((c) => (
+              <div key={c.title}>
+                <p className="text-sm font-semibold text-ink">{c.title}</p>
+                <ul className="mt-3 space-y-1">
+                  {c.links.map(([href, label]) => (
+                    <li key={href}>
+                      <Link href={href} className="inline-flex min-h-[36px] items-center text-[0.95rem] text-ink-3 transition-colors hover:text-ink">
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-
-        <p className="border-t border-white/15 pt-6 font-body text-xs leading-relaxed text-white/85">
-          {SEBI_DISCLAIMER}
-        </p>
-      </Container>
+        <div className="mt-14 border-t border-line pt-6 text-[0.8rem] leading-relaxed text-ink-3">
+          <p className="max-w-4xl">
+            23% Club is a financial education platform. Nothing on this site is investment, tax or legal advice, or a recommendation to buy or
+            sell any security. Calculators show illustrative projections using the assumptions you enter; actual returns vary and are not
+            guaranteed. Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. Consult a
+            SEBI-registered investment adviser before making investment decisions.
+          </p>
+          <p className="mt-4">© {new Date().getFullYear()} 23% Club. Made in India.</p>
+        </div>
+      </div>
     </footer>
   );
 }
