@@ -9,6 +9,9 @@ import { TOOLS } from "@/content/tools-meta";
 import { MODULES } from "@/content/school-outline";
 import { HOME_FAQ } from "@/content/faq";
 import { faqLd, jsonLd, organizationLd } from "@/lib/seo";
+import { getInsights } from "@/lib/insights";
+import { insightCategory } from "@/content/insight-categories";
+import { Cover } from "@/components/insights/InsightsList";
 
 const PILLARS = [
   { word: "Learn", href: "/learn" },
@@ -40,6 +43,7 @@ const PROBLEMS = [
 
 export default function HomePage() {
   const popular = TOOLS.filter((t) => t.popular).slice(0, 8);
+  const latest = getInsights().slice(0, 3);
 
   return (
     <>
@@ -273,6 +277,32 @@ export default function HomePage() {
               <span className="mt-2 max-w-[34ch] text-white/80">{c.body}</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ——— Insights ——— */}
+      <section className="section-tight pb-20">
+        <div className="wrap">
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="t-h2">From Insights</h2>
+            <Link href="/insights" className="btn btn-ghost btn-sm shrink-0">
+              All articles
+            </Link>
+          </div>
+          <ul className="mt-8 grid gap-5 md:grid-cols-3">
+            {latest.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/insights/${p.slug}`} className="hover-card flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-surface">
+                  <Cover category={p.category} className="h-32" />
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="text-sm font-semibold text-accent">{insightCategory(p.category).label}</p>
+                    <p className="mt-1 font-display text-xl font-bold leading-snug tracking-tight">{p.title}</p>
+                    <p className="mt-2 text-[0.95rem] text-ink-2">{p.excerpt}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

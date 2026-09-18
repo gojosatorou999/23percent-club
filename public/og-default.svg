@@ -1,11 +1,24 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#F7FAFD" />
-  <g transform="translate(440,180) scale(4.5)">
-    <polyline points="4,32 20,32 24,32 26,26 28,38 30,10 32,54 34,32 60,32"
-      fill="none" stroke="#0F52BA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
-    <line x1="31" y1="18" x2="31" y2="46" stroke="#00BFFF" stroke-width="3.5" stroke-linecap="round" />
-    <line x1="24" y1="32" x2="38" y2="32" stroke="#00BFFF" stroke-width="3.5" stroke-linecap="round" />
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a24"/>
+      <stop offset="0.6" stop-color="#19247a"/>
+      <stop offset="1" stop-color="#2f43c7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.1" r="0.6">
+      <stop offset="0" stop-color="#7a5ce0" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7a5ce0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(80,80) scale(1.6)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="4,32 20,32 24,32 26,26 28,38 30,10 32,54 34,32 60,32" stroke="#ffffff" stroke-width="3.5"/>
+    <line x1="31" y1="18" x2="31" y2="46" stroke="#00bfff" stroke-width="3.5"/>
+    <line x1="24" y1="32" x2="38" y2="32" stroke="#00bfff" stroke-width="3.5"/>
   </g>
-  <text x="600" y="440" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#0A1A2F" text-anchor="middle">23% Club</text>
-  <text x="600" y="490" font-family="Arial, sans-serif" font-size="26" fill="#5C6B7A" text-anchor="middle">Learn &#183; Invest &#183; Grow &#183; Compound</text>
+  <text x="200" y="146" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#ffffff">23% Club</text>
+  <text x="80" y="360" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" fill="#ffffff" letter-spacing="-2">Learn how money works.</text>
+  <text x="80" y="440" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#c5ccf7">We don't manage your money. We teach you how to manage it.</text>
+  <text x="80" y="540" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#7fd3f0">Learn • Invest • Grow • Compound</text>
 </svg>

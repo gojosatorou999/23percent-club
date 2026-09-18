@@ -8,7 +8,7 @@ import { Logo } from "@/components/brand/Logo";
 import { NAV, TOP_LINKS } from "@/content/nav";
 import { ThemeToggle } from "./ThemeToggle";
 import { AccountButton, NotificationBell } from "./AccountControls";
-import { openSearch } from "./CommandPalette";
+import { openSearch } from "./SearchLauncher";
 import { lockScroll } from "@/components/motion/SmoothScroll";
 import { cn } from "@/lib/cn";
 

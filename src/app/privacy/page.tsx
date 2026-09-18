@@ -32,7 +32,7 @@ export default function PrivacyPage() {
       <h2>What we do not do</h2>
       <ul>
         <li>We do not sell or share personal data.</li>
-        <li>We do not use advertising trackers.</li>
+        <li>We do not use advertising trackers or cookies. We may count page visits with Plausible, a cookie-free analytics service that stores no personal data.</li>
         <li>We do not read the numbers you enter into calculators or trackers.</li>
       </ul>
       <h2>Your rights</h2>

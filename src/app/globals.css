@@ -91,7 +91,7 @@
   --grid: #e3e6f5;
   --field-ink: 47 67 199;
   --shadow-color: 15 22 80;
-  --glass: rgb(255 255 255 / 0.76);
+  --glass: rgb(246 247 253 / 0.88);
   --logo-trace: #0f52ba;
   --nav-h: 64px;
   --tabbar-h: 64px;
@@ -127,7 +127,7 @@
   --grid: #1c2458;
   --field-ink: 154 167 239;
   --shadow-color: 0 0 0;
-  --glass: rgb(14 19 54 / 0.76);
+  --glass: rgb(7 10 36 / 0.9);
 }
 
 @theme inline {
@@ -381,6 +381,13 @@ p {
   background: var(--glass);
   -webkit-backdrop-filter: saturate(1.6) blur(18px);
   backdrop-filter: saturate(1.6) blur(18px);
+}
+
+/* Without blur support, frosted bars fall back to an opaque surface so text never shows through. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--bg);
+  }
 }
 
 /* Interactive card: responds to pointer, not to scroll. */
@@ -890,9 +897,22 @@ input[type="number"] {
   animation: float-y 6s ease-in-out infinite;
 }
 
-/* The one orchestrated moment: the hero composes itself on load. */
+/*
+ * The one orchestrated moment: the hero composes itself on load. Movement
+ * only, never opacity, so the text is painted (and counted as LCP) from the
+ * first frame.
+ */
+@keyframes settle {
+  from {
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
 .stagger > * {
-  animation: rise 0.9s var(--ease-out-expo) both;
+  animation: settle 0.9s var(--ease-out-expo) both;
 }
 .stagger > *:nth-child(2) { animation-delay: 0.08s; }
 .stagger > *:nth-child(3) { animation-delay: 0.16s; }

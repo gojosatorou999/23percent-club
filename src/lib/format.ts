@@ -53,15 +53,18 @@ export function years(value: number): string {
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-/** Deterministic date formatting (no locale drift between server and client). */
+/** Shift to Indian Standard Time so every date reads the same on server, client and any device timezone. */
+const ist = (iso: string) => new Date(new Date(iso).getTime() + 330 * 60000);
+
+/** Deterministic date formatting in IST (no locale or timezone drift between server and client). */
 export function dateShort(iso: string): string {
-  const d = new Date(iso);
+  const d = ist(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
 export function monthLabel(iso: string): string {
-  const d = new Date(iso);
+  const d = ist(iso);
   return `${MONTHS[d.getUTCMonth()]} ${String(d.getUTCFullYear()).slice(2)}`;
 }
 

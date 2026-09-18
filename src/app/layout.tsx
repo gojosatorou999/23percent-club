@@ -3,11 +3,14 @@ import { Bricolage_Grotesque, Geist } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
-import { CommandPalette } from "@/components/layout/CommandPalette";
+import { SearchLauncher } from "@/components/layout/SearchLauncher";
 import { THEME_SCRIPT } from "@/components/layout/ThemeToggle";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SymbolField } from "@/components/motion/SymbolField";
 import { Toaster } from "@/components/ui/Toaster";
+import Script from "next/script";
+
+const PLAUSIBLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" ? process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN : undefined;
 import { DESCRIPTION, SITE_NAME, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
@@ -22,7 +25,6 @@ const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
   display: "swap",
-  axes: ["opsz"],
 });
 
 const sans = Geist({
@@ -74,8 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <BottomTabBar />
-        <CommandPalette />
+        <SearchLauncher />
         <Toaster />
+        {PLAUSIBLE && <Script defer data-domain={PLAUSIBLE} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}
       </body>
     </html>
   );

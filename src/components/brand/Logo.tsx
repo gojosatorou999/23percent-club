@@ -4,8 +4,8 @@
  * exactly from the original logo; only the `light` tone swaps the trace to
  * white for use on the deep tekhelet field.
  */
-export function LogoMark({ className = "h-8 w-8", tone = "ink" }: { className?: string; tone?: "ink" | "light" }) {
-  const trace = tone === "light" ? "#ffffff" : "var(--logo-trace)";
+export function LogoMark({ className = "h-8 w-8", tone = "ink" }: { className?: string; tone?: "ink" | "light" | "brand" }) {
+  const trace = tone === "light" ? "#ffffff" : tone === "brand" ? "#0f52ba" : "var(--logo-trace)";
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-label="23% Club">
       <polyline

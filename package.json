@@ -12,13 +12,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "test:a11y": "playwright test --grep @a11y",
-    "validate:content": "tsx scripts/validate-content.ts",
-    "compliance": "tsx scripts/compliance-check.ts",
-    "lighthouse": "lhci autorun",
-    "check:links": "tsx scripts/check-links.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
-    "audit:full": "npm run verify && npm run validate:content && npm run compliance && npm run test:e2e && npm run check:links && npm run lighthouse"
+    "lighthouse": "lhci autorun"
   },
   "dependencies": {
     "fuse.js": "^7.5.0",

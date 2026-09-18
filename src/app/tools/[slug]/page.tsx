@@ -48,7 +48,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       {doc && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqLd(doc.faqs)) }} />}
 
       <section className="relative overflow-hidden">
-        <div className={cn(t.gradient, "absolute inset-x-0 top-0 h-[340px] opacity-[0.12] [mask-image:linear-gradient(180deg,black_30%,transparent)] sm:h-[400px]")} aria-hidden />
+        <div className={cn(t.gradient, "absolute inset-0 opacity-[0.12] [mask-image:linear-gradient(180deg,black_20%,transparent)]")} aria-hidden />
         <div className="wrap relative pb-8 pt-6 sm:pt-10">
           <Breadcrumbs
             items={[

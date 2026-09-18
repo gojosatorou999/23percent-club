@@ -11,44 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - run: npm ci
-
       - name: Lint
         run: npm run lint
-
       - name: Typecheck
         run: npm run typecheck
-
-      - name: Unit tests
+      - name: Unit tests (calculator parity, diagnostics, content integrity)
         run: npm run test
-
-      - name: Content validation
-        run: npm run validate:content
-
       - name: Build
         run: npm run build
-
-      - name: Compliance check
-        run: npm run compliance
-
       - name: Install Playwright browsers
-        # playwright.config.ts (Phase 8) runs chromium, webkit, and firefox
-        # projects — the ios-safari/android-chrome projects are device
-        # emulations of webkit/chromium, not separate engines. No browser
-        # arg installs all three, matching what test:e2e actually launches.
         run: npx playwright install --with-deps
-
-      - name: E2E + a11y tests
+      - name: Cross-browser smoke tests (Chromium, Firefox, WebKit, iOS, Android)
         run: npm run test:e2e
-
-      - name: Check links
-        run: npm run check:links
-
       - name: Lighthouse CI
         run: npm run lighthouse

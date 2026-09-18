@@ -213,8 +213,9 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
       raf = requestAnimationFrame(loop);
     };
 
+    let booted = false;
     const start = () => {
-      if (running || reduce || !visible || document.hidden) return;
+      if (!booted || running || reduce || !visible || document.hidden) return;
       running = true;
       raf = requestAnimationFrame(loop);
     };
@@ -284,9 +285,17 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
     window.addEventListener("pointerdown", onDown, { passive: true });
     document.addEventListener("pointerleave", onLeave);
     document.addEventListener("visibilitychange", onVis);
-    start();
+    // Start animating once the page is idle, so the loop never competes with first paint.
+    const boot = () => {
+      booted = true;
+      start();
+    };
+    const idleId = "requestIdleCallback" in window ? window.requestIdleCallback(boot, { timeout: 1500 }) : undefined;
+    const idleTimer = idleId === undefined ? window.setTimeout(boot, 700) : undefined;
 
     return () => {
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (idleTimer !== undefined) window.clearTimeout(idleTimer);
       stop();
       ro.disconnect();
       io.disconnect();

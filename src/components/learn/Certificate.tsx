@@ -54,7 +54,7 @@ export function Certificate({ slug, title, n, outcomes }: { slug: string; title:
         <div className="relative rounded-[12px] border-2 border-[#d9a646] p-6 sm:p-12" style={{ background: "radial-gradient(120% 90% at 100% 0%, #eef0fb, #ffffff 55%)" }}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <LogoMark className="h-9 w-9" />
+              <LogoMark className="h-9 w-9" tone="brand" />
               <span className="font-display text-lg font-bold tracking-tight">23% Club</span>
             </div>
             <span className="text-right text-[11px] text-[#62698f]">

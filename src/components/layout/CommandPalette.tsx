@@ -29,8 +29,8 @@ const QUICK: SearchItem[] = [
 
 let cache: SearchItem[] | null = null;
 
-export function CommandPalette() {
-  const [open, setOpen] = useState(false);
+export function CommandPalette({ initialOpen = false }: { initialOpen?: boolean }) {
+  const [open, setOpen] = useState(initialOpen);
   const [q, setQ] = useState("");
   const [items, setItems] = useState<SearchItem[] | null>(cache);
   const [active, setActive] = useState(0);
@@ -171,8 +171,4 @@ export function CommandPalette() {
       </ul>
     </Dialog>
   );
-}
-
-export function openSearch() {
-  window.dispatchEvent(new Event("club:search"));
 }

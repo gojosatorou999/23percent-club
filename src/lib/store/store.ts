@@ -113,6 +113,35 @@ export function useHydrated(): boolean {
   );
 }
 
+/* A minute-resolution clock, so client views can use "now" without impure renders. */
+let nowVal = 0;
+let nowTimer: ReturnType<typeof setInterval> | undefined;
+const nowSubs = new Set<() => void>();
+function subscribeNow(cb: () => void) {
+  nowSubs.add(cb);
+  if (!nowTimer)
+    nowTimer = setInterval(() => {
+      nowVal = Date.now();
+      nowSubs.forEach((f) => f());
+    }, 60000);
+  return () => {
+    nowSubs.delete(cb);
+    if (!nowSubs.size && nowTimer) {
+      clearInterval(nowTimer);
+      nowTimer = undefined;
+    }
+  };
+}
+
+/** Current time on the client (0 during SSR and hydration). */
+export function useNow(): number {
+  return useSyncExternalStore(
+    subscribeNow,
+    () => nowVal || (nowVal = Date.now()),
+    () => 0,
+  );
+}
+
 export function getProfile(): UserData {
   ensureLoaded();
   return state.profiles[profileKey(state)] ?? EMPTY;

@@ -50,10 +50,14 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           required
         />
       </label>
-      <label className="block">
-        <span className="t-label">Password</span>
+      <div>
+        <label htmlFor="auth-password" className="t-label">
+          Password
+        </label>
         <span className="relative mt-1.5 block">
           <input
+            id="auth-password"
+            aria-describedby={mode === "signup" ? "auth-password-hint" : undefined}
             className="input pr-12"
             type={show ? "text" : "password"}
             value={password}
@@ -71,8 +75,12 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             {show ? <EyeOff className="h-[18px] w-[18px]" /> : <Eye className="h-[18px] w-[18px]" />}
           </button>
         </span>
-        {mode === "signup" && <span className="mt-1.5 block text-sm text-ink-3">At least 8 characters.</span>}
-      </label>
+        {mode === "signup" && (
+          <span id="auth-password-hint" className="mt-1.5 block text-sm text-ink-3">
+            At least 8 characters.
+          </span>
+        )}
+      </div>
 
       {error && (
         <p role="alert" className="rounded-xl bg-neg-soft px-4 py-3 text-sm text-neg">
