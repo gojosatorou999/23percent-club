@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { Lock, Printer } from "lucide-react";
@@ -35,7 +35,7 @@ export function Certificate({ slug, title, n, outcomes }: { slug: string; title:
   const keys = Object.entries(profile.lessons).filter(([k]) => k.startsWith(slug + "/"));
   const lastLesson = keys.map(([, v]) => v).sort().pop() ?? new Date().toISOString();
   const earned = [lastLesson, quiz?.at ?? lastLesson].sort().pop()!;
-  const name = account?.name ?? "23% Club learner";
+  const name = account?.name ?? "23percent club learner";
   const certId = `23C-${slug.slice(0, 3).toUpperCase()}-${earned.slice(0, 10).replace(/-/g, "")}`;
 
   return (
@@ -55,7 +55,7 @@ export function Certificate({ slug, title, n, outcomes }: { slug: string; title:
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <LogoMark className="h-9 w-9" tone="brand" />
-              <span className="font-display text-lg font-bold tracking-tight">23% Club</span>
+              <span className="font-display text-lg font-bold tracking-tight">23percent club</span>
             </div>
             <span className="text-right text-[11px] text-[#62698f]">
               Certificate ID
@@ -78,7 +78,7 @@ export function Certificate({ slug, title, n, outcomes }: { slug: string; title:
           </ul>
           <div className="mt-12 flex items-end justify-between gap-6">
             <div>
-              <p className="font-display text-xl font-semibold">23% Club</p>
+              <p className="font-display text-xl font-semibold">23percent club</p>
               <p className="border-t border-[#c3c9ec] pt-1 text-xs text-[#62698f]">Learn • Invest • Grow • Compound</p>
             </div>
             <div className="grid h-20 w-20 shrink-0 place-items-center rounded-full text-center text-[10px] font-bold uppercase leading-tight text-white" style={{ background: "linear-gradient(135deg,#bf8a2a,#ecc97c)" }}>

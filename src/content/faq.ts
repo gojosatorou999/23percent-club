@@ -1,12 +1,12 @@
-export interface FaqItem {
+﻿export interface FaqItem {
   q: string;
   a: string;
 }
 
 export const HOME_FAQ: FaqItem[] = [
   {
-    q: "What is 23% Club?",
-    a: "23% Club is a financial education platform for India. It combines a structured School of Finance, 42 calculators, an investor personality test, a financial health check, a tax saving maximizer and a personal dashboard that tracks your learning and your money.",
+    q: "What is 23percent club?",
+    a: "23percent club is a financial education platform for India. It combines a structured School of Finance, 42 calculators, an investor personality test, a financial health check, a tax saving maximizer and a personal dashboard that tracks your learning and your money.",
   },
   {
     q: "Do you manage money or sell financial products?",
@@ -27,7 +27,7 @@ export const HOME_FAQ: FaqItem[] = [
 ];
 
 export const FAQ_GROUPS: { title: string; items: FaqItem[] }[] = [
-  { title: "About 23% Club", items: HOME_FAQ },
+  { title: "About 23percent club", items: HOME_FAQ },
   {
     title: "Learning",
     items: [

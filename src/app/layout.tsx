@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -7,12 +7,16 @@ import { SearchLauncher } from "@/components/layout/SearchLauncher";
 import { THEME_SCRIPT } from "@/components/layout/ThemeToggle";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SymbolField } from "@/components/motion/SymbolField";
+import { Preloader, SPLASH_SCRIPT } from "@/components/motion/Preloader";
+import { BackToTop } from "@/components/motion/BackToTop";
+import { EdgeLight } from "@/components/motion/EdgeLight";
 import { Toaster } from "@/components/ui/Toaster";
 import Script from "next/script";
 
 const PLAUSIBLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" ? process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN : undefined;
 import { DESCRIPTION, SITE_NAME, siteUrl } from "@/lib/seo";
 import "./globals.css";
+import "./fx.css";
 
 /*
  * Bricolage Grotesque carries headlines and the big numbers — its optical
@@ -45,7 +49,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "23% Club | Learn how money works", template: "%s | 23% Club" },
+  title: { default: "23percent club | Learn how money works", template: "%s | 23percent club" },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: ["financial education India", "SIP calculator", "personal finance", "investing course", "tax calculator", "financial literacy"],
@@ -60,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-IN" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: SPLASH_SCRIPT }} />
       </head>
       <body>
         <a
@@ -68,7 +73,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <Preloader />
+        <div className="aurora" aria-hidden>
+          <i />
+          <i />
+          <i />
+        </div>
         <SymbolField fixed />
+        <EdgeLight />
         <SmoothScroll />
         <Header />
         <main id="main" className="relative min-h-[70vh]" style={{ paddingTop: "calc(var(--nav-h) + env(safe-area-inset-top))" }}>
@@ -76,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <BottomTabBar />
+        <BackToTop />
         <SearchLauncher />
         <Toaster />
         {PLAUSIBLE && <Script defer data-domain={PLAUSIBLE} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}

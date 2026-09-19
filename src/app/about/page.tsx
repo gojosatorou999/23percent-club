@@ -1,10 +1,10 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "About 23% Club",
-  description: "Why 23% Club exists, what we believe about money, and the lines we won't cross.",
+  title: "About 23percent club",
+  description: "Why 23percent club exists, what we believe about money, and the lines we won't cross.",
   path: "/about",
 });
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
       <PageHero
         crumbs={[{ name: "About", path: "/about" }]}
         title="We don't manage your money. We teach you how to manage it."
-        lead="23% Club is a financial education platform for India. It exists because most people are never taught how money works, and pay for it through bad products, bad timing and missed years of compounding."
+        lead="23percent club is a financial education platform for India. It exists because most people are never taught how money works, and pay for it through bad products, bad timing and missed years of compounding."
       />
       <section className="section-tight">
         <div className="wrap grid gap-4 sm:grid-cols-2">

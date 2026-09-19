@@ -1,9 +1,9 @@
-import { LegalPage } from "@/components/ui/LegalPage";
+﻿import { LegalPage } from "@/components/ui/LegalPage";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Disclosures",
-  description: "What 23% Club is and is not: educational content, not investment advice.",
+  description: "What 23percent club is and is not: educational content, not investment advice.",
   path: "/disclosures",
 });
 
@@ -12,8 +12,8 @@ export default function DisclosuresPage() {
     <LegalPage title="Disclosures" path="/disclosures" updated="19 September 2026">
       <h2>Education, not advice</h2>
       <p>
-        23% Club provides financial education. Nothing on this website, in our lessons, calculators, assessments, events or articles, is
-        investment advice, research, a recommendation or an offer to buy or sell any security, fund or financial product. 23% Club is not
+        23percent club provides financial education. Nothing on this website, in our lessons, calculators, assessments, events or articles, is
+        investment advice, research, a recommendation or an offer to buy or sell any security, fund or financial product. 23percent club is not
         registered with SEBI as an investment adviser or research analyst.
       </p>
       <p>

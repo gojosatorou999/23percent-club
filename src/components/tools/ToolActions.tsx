@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Bookmark, BookmarkCheck, RotateCcw, Share2 } from "lucide-react";
 import { logActivity, toast, uid, update, useProfile } from "@/lib/store/store";
@@ -42,7 +42,7 @@ export function ToolActions({ slug, name, query, headline, onReset }: { slug: st
     const url = `${window.location.origin}/tools/${slug}?${query}`;
     if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
       try {
-        await navigator.share({ title: `${name} | 23% Club`, text: headline, url });
+        await navigator.share({ title: `${name} | 23percent club`, text: headline, url });
         return;
       } catch {
         /* dismissed */

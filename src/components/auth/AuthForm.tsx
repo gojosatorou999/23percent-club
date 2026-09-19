@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -102,7 +102,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           </>
         ) : (
           <>
-            New to 23% Club?{" "}
+            New to 23percent club?{" "}
             <Link href={`/signup?next=${encodeURIComponent(next)}`} className="font-semibold text-accent">
               Create a free account
             </Link>

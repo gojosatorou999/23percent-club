@@ -1,4 +1,4 @@
-# Content guide
+﻿# Content guide
 
 How to publish and update content without touching page code. After any change, run `npm run verify`; the build fails loudly if content is malformed.
 
@@ -14,7 +14,7 @@ slug: "your-slug"
 date: "2026-10-01"          # YYYY-MM-DD
 category: "tax"             # see src/content/insight-categories.ts
 readTime: 6
-author: "23% Club Editorial"
+author: "23percent club Editorial"
 excerpt: "One or two sentences, under 220 characters."
 status: "published"          # or "draft" (page renders, not listed, noindex)
 sources: ["Source name"]

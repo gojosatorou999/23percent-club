@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 
 const COLS = [
@@ -47,7 +47,8 @@ const COLS = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-line bg-surface pb-tabbar">
+    <footer className="footer-ground relative pb-tabbar">
+      <div className="fade-rule mx-auto max-w-[1240px]" aria-hidden />
       <div className="wrap py-14 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           <div>
@@ -64,7 +65,7 @@ export function Footer() {
                 <ul className="mt-3 space-y-1">
                   {c.links.map(([href, label]) => (
                     <li key={href}>
-                      <Link href={href} className="inline-flex min-h-[36px] items-center text-[0.95rem] text-ink-3 transition-colors hover:text-ink">
+                      <Link href={href} className="inline-flex min-h-[36px] items-center text-[0.95rem] text-ink-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-ink">
                         {label}
                       </Link>
                     </li>
@@ -74,14 +75,15 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-14 border-t border-line pt-6 text-[0.8rem] leading-relaxed text-ink-3">
+        <div className="fade-rule mt-14" aria-hidden />
+        <div className="pt-6 text-[0.8rem] leading-relaxed text-ink-3">
           <p className="max-w-4xl">
-            23% Club is a financial education platform. Nothing on this site is investment, tax or legal advice, or a recommendation to buy or
+            23percent club is a financial education platform. Nothing on this site is investment, tax or legal advice, or a recommendation to buy or
             sell any security. Calculators show illustrative projections using the assumptions you enter; actual returns vary and are not
             guaranteed. Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. Consult a
             SEBI-registered investment adviser before making investment decisions.
           </p>
-          <p className="mt-4">© {new Date().getFullYear()} 23% Club. Made in India.</p>
+          <p className="mt-4">© {new Date().getFullYear()} 23percent club. Made in India.</p>
         </div>
       </div>
     </footer>

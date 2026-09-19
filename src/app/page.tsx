@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { HeroDemo } from "@/components/home/HeroDemo";
 import { Journey } from "@/components/home/Journey";
 import { TwentyThree } from "@/components/home/TwentyThree";
@@ -52,8 +52,8 @@ export default function HomePage() {
 
       {/* ——— Hero ——— */}
       <section className="relative isolate overflow-hidden">
-        <div className="g-soft absolute inset-0 -z-10" aria-hidden />
-        <SymbolField mode="vivid" className="-z-10 opacity-70 [mask-image:linear-gradient(90deg,transparent,black_30%,black_70%,transparent)] max-lg:[mask-image:linear-gradient(180deg,black,transparent_85%)]" />
+        <div className="g-soft soft-glow" aria-hidden />
+        <SymbolField mode="vivid" className="-z-10 opacity-70 [mask-image:radial-gradient(ellipse_65%_75%_at_62%_45%,black_35%,transparent_100%)] max-lg:[mask-image:linear-gradient(180deg,black,transparent_85%)]" />
         <div className="wrap grid items-center gap-14 pb-20 pt-10 sm:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="stagger">
             <ul className="flex flex-wrap gap-2" aria-label="Learn, invest, grow, compound">
@@ -99,12 +99,12 @@ export default function HomePage() {
       </section>
 
       {/* ——— Problem → solution ——— */}
-      <section className="section bg-surface">
-        <div className="wrap">
+      <section className="section">
+        <div className="reveal wrap">
           <h2 className="t-h2 max-w-[20ch]">Money is taught badly, if it is taught at all.</h2>
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {PROBLEMS.map((p) => (
-              <article key={p.problem} className="flex flex-col rounded-[24px] border border-line bg-bg p-6 sm:p-7">
+              <article key={p.problem} className="hover-card flex flex-col rounded-[24px] border border-line bg-surface p-6 sm:p-7">
                 <p className="font-display text-[1.35rem] font-semibold leading-snug tracking-tight text-ink">{p.problem}</p>
                 <div className="my-6 flex items-center gap-3 text-sm font-semibold text-accent" aria-hidden>
                   <span className="h-px flex-1 bg-line-strong" />
@@ -123,18 +123,18 @@ export default function HomePage() {
 
       {/* ——— Journey ——— */}
       <section className="section">
-        <div className="wrap">
+        <div className="reveal wrap">
           <h2 className="t-h2 max-w-[22ch]">Seven steps, one thread.</h2>
           <p className="t-lead mt-4 max-w-[56ch]">
-            Every part of 23% Club connects. A diagnosis points to a lesson, a lesson points to a tool, and all of it lands in your dashboard.
+            Every part of 23percent club connects. A diagnosis points to a lesson, a lesson points to a tool, and all of it lands in your dashboard.
           </p>
           <Journey />
         </div>
       </section>
 
       {/* ——— School ——— */}
-      <section className="section bg-surface">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-2">
+      <section className="section">
+        <div className="reveal wrap grid items-center gap-12 lg:grid-cols-2">
           <div>
             <h2 className="t-h2 max-w-[16ch]">The 23 School of Finance</h2>
             <p className="t-lead mt-4 max-w-[48ch]">
@@ -160,7 +160,7 @@ export default function HomePage() {
 
       {/* ——— Tools ——— */}
       <section className="section">
-        <div className="wrap">
+        <div className="reveal wrap">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="t-h2 max-w-[18ch]">Test a decision before you make it.</h2>
@@ -195,8 +195,8 @@ export default function HomePage() {
       </section>
 
       {/* ——— Know yourself ——— */}
-      <section className="section bg-surface">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
+      <section className="section">
+        <div className="reveal wrap grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <h2 className="t-h2 max-w-[16ch]">Know yourself before you invest.</h2>
             <p className="t-lead mt-4 max-w-[48ch]">
@@ -218,7 +218,7 @@ export default function HomePage() {
 
       {/* ——— Tax ——— */}
       <section className="section">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+        <div className="reveal wrap grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
           <div className="order-2 lg:order-1">
             <TaxMock />
           </div>
@@ -236,8 +236,8 @@ export default function HomePage() {
       </section>
 
       {/* ——— Dashboard ——— */}
-      <section className="deep grain section overflow-hidden">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
+      <section className="deep deep-band grain section overflow-hidden">
+        <div className="reveal wrap grid items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <h2 className="t-h2 max-w-[16ch]">A command centre for your money and your learning.</h2>
             <p className="t-lead mt-4 max-w-[46ch]">
@@ -259,17 +259,17 @@ export default function HomePage() {
 
       {/* ——— 23% ——— */}
       <section className="section">
-        <div className="wrap">
+        <div className="reveal wrap">
           <TwentyThree />
         </div>
       </section>
 
       {/* ——— More of the ecosystem ——— */}
       <section className="section-tight pb-20">
-        <div className="wrap grid gap-4 md:grid-cols-3">
+        <div className="reveal wrap grid gap-4 md:grid-cols-3">
           {[
-            { href: "/universe", title: "23% Club Universe", body: "Every asset class, product and concept on one map, with learning paths through it.", g: "g-night" },
-            { href: "/junior", title: "23% Club Junior", body: "Stories, games and challenges that teach money to kids aged 8 to 12 and teens 13 to 17.", g: "g-iris" },
+            { href: "/universe", title: "23percent club Universe", body: "Every asset class, product and concept on one map, with learning paths through it.", g: "g-night" },
+            { href: "/junior", title: "23percent club Junior", body: "Stories, games and challenges that teach money to kids aged 8 to 12 and teens 13 to 17.", g: "g-iris" },
             { href: "/events", title: "Events and live", body: "Free webinars, workshops and masterclasses, with recordings and takeaways.", g: "g-aurora" },
           ].map((c) => (
             <Link key={c.href} href={c.href} className={`${c.g} grain hover-card relative flex min-h-[240px] flex-col justify-end overflow-hidden rounded-[28px] p-6 text-white sm:p-8`}>
@@ -282,7 +282,7 @@ export default function HomePage() {
 
       {/* ——— Insights ——— */}
       <section className="section-tight pb-20">
-        <div className="wrap">
+        <div className="reveal wrap">
           <div className="flex items-end justify-between gap-4">
             <h2 className="t-h2">From Insights</h2>
             <Link href="/insights" className="btn btn-ghost btn-sm shrink-0">
@@ -307,11 +307,11 @@ export default function HomePage() {
       </section>
 
       {/* ——— FAQ ——— */}
-      <section className="section bg-surface">
-        <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+      <section className="section">
+        <div className="reveal wrap grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div>
             <h2 className="t-h2">Questions, answered</h2>
-            <p className="t-lead mt-4 max-w-[36ch]">What 23% Club is, what it isn&apos;t, and how your data is handled.</p>
+            <p className="t-lead mt-4 max-w-[36ch]">What 23percent club is, what it isn&apos;t, and how your data is handled.</p>
             <Link href="/faq" className="btn btn-ghost mt-6">
               Read all FAQs
             </Link>
@@ -322,15 +322,15 @@ export default function HomePage() {
 
       {/* ——— Final CTA ——— */}
       <section className="section">
-        <div className="wrap">
-          <div className="g-tekhelet grain relative overflow-hidden rounded-[36px] px-6 py-14 text-center text-white sm:px-12 sm:py-20">
+        <div className="reveal wrap">
+          <div className="g-tekhelet grain rim relative overflow-hidden rounded-[36px] px-6 py-14 text-center text-white sm:px-12 sm:py-20">
             <h2 className="t-display mx-auto max-w-[18ch]">Learn it once. Use it for the rest of your life.</h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-lg text-white/80">
               Free to use. No products to sell you, no commissions, no tips. Only the knowledge and the tools.
             </p>
             <div className="mt-9 flex flex-col justify-center gap-3 xs:flex-row">
               <Link href="/signup" className="btn btn-light">
-                Join 23% Club
+                Join 23percent club
               </Link>
               <Link href="/learn/money-foundations" className="btn border-white/30 bg-white/10 text-white hover:bg-white/20">
                 Start module 1

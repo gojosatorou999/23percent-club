@@ -1,11 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { PARENT_GUIDE } from "@/content/junior";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Parent guide: teaching children about money",
-  description: "An age-by-age guide to teaching children about money in India, with conversation starters and family activities from 23% Club Junior.",
+  description: "An age-by-age guide to teaching children about money in India, with conversation starters and family activities from 23percent club Junior.",
   path: "/junior/parents",
 });
 
@@ -40,13 +40,13 @@ export default function ParentsPage() {
           </ol>
         </div>
       </section>
-      <section className="section-tight bg-surface">
+      <section className="section-tight">
         <div className="wrap grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="t-h2">Conversation starters</h2>
             <ul className="mt-6 space-y-3">
               {PARENT_GUIDE.starters.map((s) => (
-                <li key={s} className="rounded-2xl bg-bg p-4 font-display text-lg font-medium tracking-tight">
+                <li key={s} className="rounded-2xl border border-line bg-surface p-4 font-display text-lg font-medium tracking-tight">
                   “{s}”
                 </li>
               ))}
@@ -56,7 +56,7 @@ export default function ParentsPage() {
             <h2 className="t-h2">Family activities</h2>
             <ul className="mt-6 grid gap-3">
               {PARENT_GUIDE.activities.map((a) => (
-                <li key={a.t} className="rounded-2xl border border-line bg-bg p-5">
+                <li key={a.t} className="rounded-2xl border border-line bg-surface p-5">
                   <p className="font-semibold">{a.t}</p>
                   <p className="mt-1 text-ink-2">{a.b}</p>
                 </li>

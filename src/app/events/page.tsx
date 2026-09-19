@@ -1,10 +1,10 @@
-import { PageHero } from "@/components/ui/PageHero";
+﻿import { PageHero } from "@/components/ui/PageHero";
 import { EventsBoard } from "@/components/events/EventsBoard";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Events and live: webinars, workshops and masterclasses",
-  description: "Free live sessions from 23% Club: tax webinars, mutual fund classes, financial planning workshops, behavioural finance masterclasses and family sessions, with takeaways from past events.",
+  description: "Free live sessions from 23percent club: tax webinars, mutual fund classes, financial planning workshops, behavioural finance masterclasses and family sessions, with takeaways from past events.",
   path: "/events",
 });
 

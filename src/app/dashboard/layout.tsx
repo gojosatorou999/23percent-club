@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { DashNav, GuestBanner } from "@/components/dashboard/DashNav";
 
-export const metadata: Metadata = { title: { default: "Dashboard", template: "%s | Dashboard | 23% Club" }, robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: { default: "Dashboard", template: "%s | Dashboard | 23percent club" }, robots: { index: false, follow: false } };
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

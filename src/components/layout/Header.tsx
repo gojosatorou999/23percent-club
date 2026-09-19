@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,6 +18,15 @@ export function Header() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [drawer, setDrawer] = useState(false);
   const closeTimer = useRef<number | undefined>(undefined);
+  const navRef = useRef<HTMLElement>(null);
+  const [pill, setPill] = useState({ left: 0, width: 0, on: false });
+
+  // The pill glides to whichever item is under the pointer, and rests on the current section.
+  const pillTo = (el: HTMLElement | null) => {
+    if (!el) return setPill((p) => ({ ...p, on: false }));
+    setPill({ left: el.offsetLeft, width: el.offsetWidth, on: true });
+  };
+  const pillHome = () => pillTo(navRef.current?.querySelector<HTMLElement>('[data-current="true"]') ?? null);
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 8);
@@ -32,6 +41,16 @@ export function Header() {
     setOpenGroup(null);
     setDrawer(false);
   }
+
+  useEffect(() => {
+    const id = requestAnimationFrame(pillHome);
+    const late = window.setTimeout(pillHome, 900);
+    return () => {
+      cancelAnimationFrame(id);
+      window.clearTimeout(late);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   useEffect(() => {
     lockScroll(drawer);
@@ -64,29 +83,38 @@ export function Header() {
   return (
     <>
       <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-[60] transition-[background-color,border-color,box-shadow] duration-300",
-          scrolled || openGroup || drawer ? "glass border-b border-line" : "border-b border-transparent",
-        )}
+        className={cn("nav-shell nav-enter fixed inset-x-0 top-0 z-[60]", (scrolled || openGroup || drawer) && "glass")}
+        data-scrolled={scrolled || !!openGroup || drawer}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
         onMouseLeave={leave}
       >
+        <span className="nav-line" aria-hidden />
+        <span className="nav-progress" aria-hidden />
         <div className="wrap flex h-[var(--nav-h)] items-center gap-3">
-          <Link href="/" className="mr-2 shrink-0 rounded-lg" aria-label="23% Club home">
+          <Link href="/" className="logo-link mr-2 shrink-0 rounded-lg" aria-label="23percent club home">
             <Logo />
           </Link>
 
-          <nav aria-label="Main" className="hidden flex-1 items-center gap-0.5 lg:flex">
-            {NAV.map((g) => (
-              <div key={g.id} onMouseEnter={() => enter(g.id)}>
+          <nav
+            ref={navRef}
+            aria-label="Main"
+            className="relative hidden flex-1 items-center gap-0.5 lg:flex"
+            onMouseLeave={pillHome}
+            onFocus={(e) => pillTo((e.target as HTMLElement).closest<HTMLElement>(".nav-link"))}
+          >
+            <span className="nav-pill" style={{ left: pill.left, width: pill.width, opacity: pill.on ? 1 : 0 }} aria-hidden />
+            {NAV.map((g, i) => (
+              <div key={g.id} className="nav-item" style={{ ["--d" as string]: i }} onMouseEnter={() => enter(g.id)}>
                 <button
                   type="button"
                   aria-expanded={openGroup === g.id}
                   aria-controls="mega-panel"
+                  data-current={isActive(g.href)}
+                  onMouseEnter={(e) => pillTo(e.currentTarget)}
                   onClick={() => setOpenGroup((o) => (o === g.id ? null : g.id))}
                   className={cn(
-                    "flex h-10 items-center gap-1 rounded-xl px-3.5 text-[0.95rem] font-medium transition-colors",
-                    openGroup === g.id || isActive(g.href) ? "bg-surface-2 text-ink" : "text-ink-2 hover:text-ink",
+                    "nav-link flex h-10 items-center gap-1 rounded-xl px-3.5 text-[0.95rem] font-medium",
+                    openGroup === g.id || isActive(g.href) ? "text-ink" : "text-ink-2 hover:text-ink",
                   )}
                 >
                   {g.label}
@@ -94,14 +122,19 @@ export function Header() {
                 </button>
               </div>
             ))}
-            {TOP_LINKS.map((l) => (
+            {TOP_LINKS.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                onMouseEnter={leave}
+                data-current={isActive(l.href)}
+                onMouseEnter={(e) => {
+                  leave();
+                  pillTo(e.currentTarget);
+                }}
+                style={{ ["--d" as string]: NAV.length + i }}
                 className={cn(
-                  "flex h-10 items-center rounded-xl px-3.5 text-[0.95rem] font-medium transition-colors",
-                  isActive(l.href) ? "bg-surface-2 text-ink" : "text-ink-2 hover:text-ink",
+                  "nav-item nav-link flex h-10 items-center rounded-xl px-3.5 text-[0.95rem] font-medium",
+                  isActive(l.href) ? "text-ink" : "text-ink-2 hover:text-ink",
                 )}
               >
                 {l.label}
@@ -113,7 +146,7 @@ export function Header() {
             <button
               type="button"
               onClick={openSearch}
-              className="hidden h-10 items-center gap-2 rounded-xl border border-line bg-surface px-3 text-sm text-ink-3 transition-colors hover:border-line-strong md:flex"
+              className="search-pill hidden h-10 items-center gap-2 rounded-xl px-3 text-sm text-ink-3 md:flex"
               aria-label="Search"
             >
               <Search className="h-4 w-4" aria-hidden />
@@ -144,9 +177,10 @@ export function Header() {
         {group && (
           <div
             id="mega-panel"
-            className="anim-fade hidden border-t border-line lg:block"
+            className="mega-in relative hidden lg:block"
             onMouseEnter={() => enter(group.id)}
           >
+            <div className="fade-rule" aria-hidden />
             <div className="wrap grid grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] gap-10 py-8">
               <div>
                 <p className="font-display text-2xl font-semibold tracking-tight">{group.label}</p>
@@ -158,7 +192,7 @@ export function Header() {
               <ul className={cn("grid gap-1", group.links.some((l) => l.blurb) ? "grid-cols-2" : "grid-cols-3")}>
                 {group.links.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="block rounded-2xl px-4 py-3 transition-colors hover:bg-surface-2">
+                    <Link href={l.href} className="mega-link block rounded-2xl px-4 py-3 hover:bg-surface-2">
                       <span className="block font-medium text-ink">{l.label}</span>
                       {l.blurb && <span className="mt-0.5 block text-sm text-ink-3">{l.blurb}</span>}
                     </Link>

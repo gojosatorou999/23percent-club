@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -115,7 +115,7 @@ export function CommandPalette({ initialOpen = false }: { initialOpen?: boolean 
   }, [active]);
 
   return (
-    <Dialog open={open} onClose={close} title="Search 23% Club" size="md" position="top" hideTitle>
+    <Dialog open={open} onClose={close} title="Search 23percent club" size="md" position="top" hideTitle>
       <div className="flex items-center gap-3 border-b border-line pb-3">
         <Search className="h-5 w-5 shrink-0 text-ink-3" aria-hidden />
         <input

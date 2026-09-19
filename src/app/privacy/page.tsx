@@ -1,9 +1,9 @@
-import { LegalPage } from "@/components/ui/LegalPage";
+﻿import { LegalPage } from "@/components/ui/LegalPage";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Privacy policy",
-  description: "How 23% Club handles your data: your figures stay on your device.",
+  description: "How 23percent club handles your data: your figures stay on your device.",
   path: "/privacy",
 });
 

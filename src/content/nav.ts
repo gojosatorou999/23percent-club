@@ -1,4 +1,4 @@
-export interface NavLink {
+﻿export interface NavLink {
   href: string;
   label: string;
   blurb?: string;
@@ -20,7 +20,7 @@ export const NAV: NavGroup[] = [
     intro: "Structured lessons, visual maps and plain-language articles.",
     links: [
       { href: "/learn", label: "23 School of Finance", blurb: "13 modules from fundamentals to advanced investing" },
-      { href: "/universe", label: "23% Club Universe", blurb: "The financial ecosystem, mapped visually" },
+      { href: "/universe", label: "23percent club Universe", blurb: "The financial ecosystem, mapped visually" },
       { href: "/universe/glossary", label: "Glossary", blurb: "Every term, explained in one breath" },
       { href: "/insights", label: "Insights", blurb: "Essays, case studies and market education" },
       { href: "/junior", label: "Junior", blurb: "Money lessons and games for ages 8 to 17" },

@@ -75,7 +75,8 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       </section>
 
       {doc && (
-        <section className="border-t border-line bg-surface py-14 sm:py-20">
+        <section className="py-14 sm:py-20">
+          <div className="fade-rule mx-auto mb-14 max-w-[1160px]" aria-hidden />
           <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             <div className="min-w-0 space-y-12">
               <div>

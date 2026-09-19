@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useSyncExternalStore } from "react";
 import { sha256 } from "./sha256";
@@ -15,7 +15,7 @@ import {
 import { MODULE_LESSON_KEYS } from "@/content/school-outline";
 
 /*
- * The 23% Club client store.
+ * The 23percent club client store.
  *
  * Accounts, progress and trackers live on this device (localStorage), under
  * one versioned key. Every write goes through `commit`, which persists,
@@ -233,7 +233,7 @@ export function signUp(input: { name: string; email: string; password: string })
   const guest = state.profiles[GUEST] ?? emptyUserData();
   const welcome: AppNotification = {
     id: uid(),
-    title: `Welcome to 23% Club, ${account.name.split(" ")[0]}`,
+    title: `Welcome to 23percent club, ${account.name.split(" ")[0]}`,
     body: "Start with the financial health check. It shows which lessons will help you most.",
     href: "/know-yourself/health",
     at: now(),
@@ -244,7 +244,7 @@ export function signUp(input: { name: string; email: string; password: string })
   const profiles = { ...state.profiles, [email]: profile };
   delete profiles[GUEST];
   commit({ ...state, accounts: { ...state.accounts, [email]: account }, session: email, profiles });
-  logActivity("account", "Created your 23% Club account", "/dashboard");
+  logActivity("account", "Created your 23percent club account", "/dashboard");
   return { ok: true };
 }
 

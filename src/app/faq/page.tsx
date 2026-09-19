@@ -1,11 +1,11 @@
-import { Faq } from "@/components/ui/Accordion";
+﻿import { Faq } from "@/components/ui/Accordion";
 import { PageHero } from "@/components/ui/PageHero";
 import { FAQ_GROUPS } from "@/content/faq";
 import { faqLd, jsonLd, pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Frequently asked questions",
-  description: "Answers about 23% Club's lessons, calculators, diagnostics, accounts and privacy.",
+  description: "Answers about 23percent club's lessons, calculators, diagnostics, accounts and privacy.",
   path: "/faq",
 });
 

@@ -126,14 +126,14 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
       if (widthChanged || force || particles.length === 0) seed();
     };
 
-    const R = vivid ? 170 : 130;
+    const R = vivid ? 170 : 160;
 
     const frame = () => {
       ctx.clearRect(0, 0, W, H);
       const sy = window.scrollY;
       scrollVel = scrollVel * 0.85 + (sy - lastScroll) * 0.15;
       lastScroll = sy;
-      const baseAlpha = vivid ? 0.5 : 0.13;
+      const baseAlpha = vivid ? 0.5 : 0.2;
 
       // ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
@@ -146,7 +146,7 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
         }
         ctx.beginPath();
         ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgb(${ink} / ${rp.life * (vivid ? 0.35 : 0.18)})`;
+        ctx.strokeStyle = `rgb(${ink} / ${rp.life * (vivid ? 0.35 : 0.28)})`;
         ctx.lineWidth = 1.25;
         ctx.stroke();
       }
@@ -170,7 +170,7 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
           ctx.beginPath();
           ctx.moveTo(pointer.x, pointer.y);
           ctx.lineTo(p.x, p.y);
-          ctx.strokeStyle = `rgb(${ink} / ${(1 - d / R) * (vivid ? 0.45 : 0.22)})`;
+          ctx.strokeStyle = `rgb(${ink} / ${(1 - d / R) * (vivid ? 0.45 : 0.34)})`;
           ctx.stroke();
         } else {
           p.heat *= 0.96;
@@ -195,7 +195,7 @@ export function SymbolField({ mode = "ambient", className, fixed = false }: { mo
         else if (p.y > H + m) p.y = -m;
 
         const size = (vivid ? 16 : 13) + p.z * (vivid ? 22 : 16);
-        const a = Math.min(1, baseAlpha * (0.35 + p.z * 0.65) + p.heat * (vivid ? 0.45 : 0.3));
+        const a = Math.min(1, baseAlpha * (0.35 + p.z * 0.65) + p.heat * (vivid ? 0.45 : 0.45));
         const s = sprites[p.g];
         if (!s) continue;
         ctx.globalAlpha = a;

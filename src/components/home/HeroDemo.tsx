@@ -39,7 +39,7 @@ export function HeroDemo() {
   return (
     <div className="relative mx-auto w-full max-w-[460px] lg:ml-auto">
       {/* back cards */}
-      <div className="absolute -left-16 top-44 z-10 hidden w-48 rotate-[-5deg] rounded-2xl border border-line bg-surface p-4 lift-lg xl:-left-24 lg:block float-y" aria-hidden>
+      <div className="pointer-events-none absolute -left-16 top-44 z-10 hidden w-48 rotate-[-5deg] rounded-2xl border border-line bg-surface p-4 lift-lg xl:-left-24 lg:block float-y" aria-hidden>
         <div className="flex items-center gap-3">
           <ProgressRing value={0.74} size={46} stroke={5}>
             <span className="text-xs font-bold tnum">74</span>
@@ -51,7 +51,7 @@ export function HeroDemo() {
         </div>
       </div>
       <div
-        className="absolute -bottom-12 -right-4 z-10 hidden w-56 rotate-[4deg] rounded-2xl border border-line bg-surface p-4 lift-lg lg:block float-y"
+        className="pointer-events-none absolute -bottom-24 -right-6 z-10 hidden w-56 rotate-[4deg] rounded-2xl border border-line bg-surface p-4 lift-lg lg:block float-y"
         style={{ animationDelay: "-3s" }}
         aria-hidden
       >
@@ -62,7 +62,7 @@ export function HeroDemo() {
         </div>
       </div>
 
-      <div className="relative rounded-[28px] border border-line bg-surface p-5 lift-lg sm:p-6">
+      <div className="rim relative rounded-[28px] border border-line bg-surface p-5 lift-lg sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-medium text-ink-3">If you invest every month</p>

@@ -1,4 +1,4 @@
-# 23% Club
+﻿# 23percent club
 
 **Learn • Invest • Grow • Compound.** A financial education platform for India: *we don't manage your money, we teach you how to manage it.*
 
@@ -66,4 +66,4 @@ Copy `.env.example`. `NEXT_PUBLIC_SITE_URL` is used for canonical URLs, the site
 
 ## Compliance
 
-All content is education, not investment advice; 23% Club is not a SEBI-registered adviser. Diagnostics are self-assessments, not SEBI risk profiles. Every calculator shows its formula. See `/disclosures`.
+All content is education, not investment advice; 23percent club is not a SEBI-registered adviser. Diagnostics are self-assessments, not SEBI risk profiles. Every calculator shows its formula. See `/disclosures`.

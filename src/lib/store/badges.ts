@@ -1,4 +1,4 @@
-import type { UserData } from "./types";
+﻿import type { UserData } from "./types";
 
 export interface BadgeDef {
   id: string;
@@ -57,7 +57,7 @@ export const BADGES: BadgeDef[] = [
   { id: "streak-7", name: "Seven-day streak", description: "Kept a money habit for seven days in a row.", glyph: "7", tier: "silver", test: (d) => longestHabitStreak(d) >= 7 },
   { id: "tracker-3", name: "Steady ledger", description: "Logged three months of income and savings.", glyph: "3", tier: "silver", test: (d) => d.ledger.length >= 3 },
   { id: "event-goer", name: "In the room", description: "Registered for a live event.", glyph: "●", tier: "bronze", test: (d) => Object.keys(d.events).length >= 1 },
-  { id: "junior-star", name: "Junior star", description: "Earned 10 stars in 23% Club Junior.", glyph: "★", tier: "bronze", test: (d) => d.junior.stars >= 10 },
+  { id: "junior-star", name: "Junior star", description: "Earned 10 stars in 23percent club Junior.", glyph: "★", tier: "bronze", test: (d) => d.junior.stars >= 10 },
 ];
 
 export { longestHabitStreak };

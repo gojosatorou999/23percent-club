@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
-export const SITE_NAME = "23% Club";
+export const SITE_NAME = "23percent club";
 export const TAGLINE = "Learn • Invest • Grow • Compound";
 export const DESCRIPTION =
-  "23% Club is a financial education platform for India: a 13-module School of Finance, 42 calculators, an investor personality test, a financial health check, a tax saving maximizer and a personal learning dashboard. We don't manage your money. We teach you how to manage it.";
+  "23percent club is a financial education platform for India: a 13-module School of Finance, 42 calculators, an investor personality test, a financial health check, a tax saving maximizer and a personal learning dashboard. We don't manage your money. We teach you how to manage it.";
 
 export function siteUrl(): string {
   return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

@@ -1,4 +1,4 @@
-export interface AssetClass {
+﻿export interface AssetClass {
   id: string;
   name: string;
   glyph: string;
@@ -222,7 +222,7 @@ export const PATHS: LearningPath[] = [
       { label: "Inflation and real returns", href: "/learn/money-foundations/inflation-and-real-returns", kind: "Lesson" },
       { label: "Goal planner", href: "/tools/goal-planner", kind: "Tool" },
       { label: "Sukanya Samriddhi calculator", href: "/tools/sukanya-samriddhi-yojana-calculator", kind: "Tool" },
-      { label: "23% Club Junior parent guide", href: "/junior/parents", kind: "Module" },
+      { label: "23percent club Junior parent guide", href: "/junior/parents", kind: "Module" },
     ],
   },
 ];

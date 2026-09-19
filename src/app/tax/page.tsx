@@ -54,13 +54,13 @@ export default function TaxPage() {
         </div>
       </section>
 
-      <section className="section bg-surface">
+      <section className="section">
         <div className="wrap">
           <h2 className="t-h2 max-w-[20ch]">The deductions, explained</h2>
           <p className="t-lead mt-4 max-w-[60ch]">Almost all of them apply only in the old regime. Claim what you already do; don&apos;t buy products just to claim more.</p>
           <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {DEDUCTIONS.map((d) => (
-              <li key={d.k} className="flex flex-col rounded-[22px] border border-line bg-bg p-5">
+              <li key={d.k} className="flex flex-col rounded-[22px] border border-line bg-surface p-5">
                 <div className="flex items-start justify-between gap-2">
                   <p className="font-display text-2xl font-bold">{d.k}</p>
                   <span className={d.regime === "Both" ? "tag bg-pos-soft text-pos" : "tag"}>{d.regime === "Both" ? "Both regimes" : "Old regime"}</span>
@@ -103,7 +103,7 @@ export default function TaxPage() {
         </div>
       </section>
 
-      <section className="section bg-surface">
+      <section className="section">
         <div className="wrap">
           <h2 className="t-h2 max-w-[20ch]">A tax-planning year</h2>
           <ol className="mt-10 grid gap-3 md:grid-cols-4">
@@ -113,7 +113,7 @@ export default function TaxPage() {
               ["January to February", "Submit investment and rent proofs to your employer before the deadline."],
               ["By 31 July", "File your return. Match Form 16 with Form 26AS and your AIS, and choose the better regime."],
             ].map(([m, b], i) => (
-              <li key={m} className="rounded-[22px] border border-line bg-bg p-5">
+              <li key={m} className="rounded-[22px] border border-line bg-surface p-5">
                 <span className="font-display text-sm font-bold text-accent tnum">{String(i + 1).padStart(2, "0")}</span>
                 <p className="mt-2 font-display text-xl font-bold">{m}</p>
                 <p className="mt-2 text-sm text-ink-2">{b}</p>

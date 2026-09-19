@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Breadcrumbs } from "@/components/ui/PageHero";
 import { SymbolField } from "@/components/motion/SymbolField";
 import { GAMES } from "@/content/junior";
@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 import { cn } from "@/lib/cn";
 
 export const metadata = pageMeta({
-  title: "23% Club Junior: money lessons and games for kids and teens",
+  title: "23percent club Junior: money lessons and games for kids and teens",
   description: "Financial education for ages 8 to 17: stories, games, quizzes and challenges about saving, needs and wants, compounding, budgeting and staying safe from scams, plus a guide for parents.",
   path: "/junior",
 });

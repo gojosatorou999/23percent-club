@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -137,7 +137,7 @@ export function AchievementsDash() {
             </ul>
           )}
         </Card>
-        <Card title="23% Club Junior">
+        <Card title="23percent club Junior">
           <p className="flex items-center gap-2 font-display text-3xl font-bold tnum">
             {d.junior.stars} <Star className="h-7 w-7 fill-gold-400 text-gold-400" />
           </p>

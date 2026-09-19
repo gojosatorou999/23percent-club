@@ -58,7 +58,8 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <section className={cn("relative overflow-hidden", tone === "deep" ? "deep grain" : "g-soft", className)}>
+    <section className={cn("relative isolate overflow-hidden", tone === "deep" && "deep deep-band deep-band-top grain", className)}>
+      {tone !== "deep" && <div className="g-soft soft-glow" aria-hidden />}
       <div className={cn("wrap relative grid items-center gap-10 pb-14 pt-8 sm:pt-12 lg:pb-20", !!aside && "lg:grid-cols-[1.15fr_1fr]")}>
         <div className="stagger min-w-0">
           {crumbs && <Breadcrumbs items={crumbs} className="mb-6" />}

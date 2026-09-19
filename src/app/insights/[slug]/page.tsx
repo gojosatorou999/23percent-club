@@ -73,13 +73,14 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           </p>
         </div>
       </article>
-      <section className="border-t border-line bg-surface py-14">
+      <section className="py-14">
+        <div className="fade-rule mx-auto mb-14 max-w-[1160px]" aria-hidden />
         <div className="wrap">
           <h2 className="t-h3">Keep reading</h2>
           <ul className="mt-6 grid gap-5 md:grid-cols-3">
             {related.map((p) => (
               <li key={p.slug}>
-                <Link href={`/insights/${p.slug}`} className="hover-card flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-bg">
+                <Link href={`/insights/${p.slug}`} className="hover-card flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-surface">
                   <Cover category={p.category} className="h-28" />
                   <div className="p-5">
                     <p className="text-sm font-semibold text-accent">{insightCategory(p.category).label}</p>

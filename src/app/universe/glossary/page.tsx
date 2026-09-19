@@ -1,4 +1,4 @@
-import { PageHero } from "@/components/ui/PageHero";
+﻿import { PageHero } from "@/components/ui/PageHero";
 import { GlossaryList } from "@/components/universe/GlossaryList";
 import { GLOSSARY } from "@/content/glossary";
 import { jsonLd, pageMeta, siteUrl } from "@/lib/seo";
@@ -13,7 +13,7 @@ export default function GlossaryPage() {
   const ld = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    name: "23% Club personal finance glossary",
+    name: "23percent club personal finance glossary",
     url: `${siteUrl()}/universe/glossary`,
     hasDefinedTerm: GLOSSARY.map((t) => ({ "@type": "DefinedTerm", name: t.term, description: t.def })),
   };

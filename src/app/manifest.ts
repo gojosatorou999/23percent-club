@@ -1,9 +1,9 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "23% Club",
-    short_name: "23% Club",
+    name: "23percent club",
+    short_name: "23percent club",
     description: "Learn how money works. Financial education, tools and tracking for India.",
     start_url: "/",
     display: "standalone",
