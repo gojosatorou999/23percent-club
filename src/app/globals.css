@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
 /*
@@ -11,7 +11,7 @@
  * Gold appears only where something is earned: badges, certificates, streaks.
  */
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant dark ([data-theme="dark"] &, &[data-theme="dark"]);
 
 @theme {
   --color-tk-50: #f3f5fe;
@@ -354,15 +354,23 @@ p {
 /* ——— Surfaces ——— */
 
 .panel {
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 55%);
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.03),
+    0 16px 40px -26px rgb(var(--shadow-color) / 0.22);
 }
 
 .card {
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 55%);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.03),
+    0 14px 34px -26px rgb(var(--shadow-color) / 0.2);
 }
 
 .lift {
@@ -390,8 +398,12 @@ p {
   }
 }
 
-/* Interactive card: responds to pointer, not to scroll. */
+/* Interactive card: responds to pointer, not to scroll. Elevated at rest so it
+   reads as an object floating above the page, not a flat outlined box. */
 .hover-card {
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.03),
+    0 14px 34px -26px rgb(var(--shadow-color) / 0.2);
   transition:
     transform 0.35s var(--ease-out-expo),
     border-color 0.25s ease,
@@ -400,11 +412,11 @@ p {
 
 @media (hover: hover) and (pointer: fine) {
   .hover-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     border-color: var(--line-strong);
     box-shadow:
       0 2px 4px rgb(var(--shadow-color) / 0.04),
-      0 22px 48px -24px rgb(var(--shadow-color) / 0.32);
+      0 26px 54px -26px rgb(var(--shadow-color) / 0.34);
   }
 }
 

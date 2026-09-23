@@ -51,7 +51,7 @@ export function HeroDemo() {
         </div>
       </div>
       <div
-        className="pointer-events-none absolute -bottom-24 -right-6 z-10 hidden w-56 rotate-[4deg] rounded-2xl border border-line bg-surface p-4 lift-lg lg:block float-y"
+        className="pointer-events-none absolute -right-10 top-[38%] z-10 hidden w-56 -translate-y-1/2 rotate-[4deg] rounded-2xl border border-line bg-surface p-4 lift-lg xl:-right-16 lg:block float-y"
         style={{ animationDelay: "-3s" }}
         aria-hidden
       >

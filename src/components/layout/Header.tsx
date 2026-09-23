@@ -89,7 +89,6 @@ export function Header() {
         onMouseLeave={leave}
       >
         <span className="nav-line" aria-hidden />
-        <span className="nav-progress" aria-hidden />
         <div className="wrap flex h-[var(--nav-h)] items-center gap-3">
           <Link href="/" className="logo-link mr-2 shrink-0 rounded-lg" aria-label="23percent club home">
             <Logo />

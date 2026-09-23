@@ -453,6 +453,7 @@
   }
 
   .nav-shell {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent);
     transition:
       background-color 0.4s ease,
       box-shadow 0.4s ease;
@@ -462,7 +463,7 @@
     box-shadow: 0 10px 40px -24px rgb(var(--shadow-color) / 0.5);
   }
 
-  /* Animated aurora hairline under the bar once the page scrolls. */
+  /* Animated aurora hairline under the bar — a faint constant presence, brighter once scrolled. */
   .nav-line {
     position: absolute;
     left: 0;
@@ -473,35 +474,12 @@
     background: linear-gradient(90deg, transparent, #3dbdeb, #7a5ce0, #4457cf, #3dbdeb, transparent);
     background-size: 200% 100%;
     animation: pan-x 6s linear infinite;
-    opacity: 0;
+    opacity: 0.22;
     transition: opacity 0.4s ease;
   }
 
   .nav-shell[data-scrolled="true"] .nav-line {
     opacity: 0.6;
-  }
-
-  /* Reading progress along the bottom of the bar. */
-  .nav-progress {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 2px;
-    pointer-events: none;
-    transform-origin: 0 50%;
-    transform: scaleX(0);
-    background: linear-gradient(90deg, #3dbdeb, #7a5ce0, #d9a646);
-    box-shadow: 0 0 12px rgb(122 92 224 / 0.8);
-    display: none;
-  }
-
-  @supports (animation-timeline: scroll()) {
-    .nav-progress {
-      display: block;
-      animation: grow-x linear both;
-      animation-timeline: scroll(root block);
-    }
   }
 
   .logo-link .logo-trace {
