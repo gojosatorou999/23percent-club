@@ -127,7 +127,25 @@
     mask-image: linear-gradient(180deg, #000 55%, transparent);
   }
 
-  /* A full-bleed night band whose edges melt into the page. */
+  /*
+   * A full-bleed night band.
+   *
+   * The edges are crisp, deliberately. This used to dissolve its top and
+   * bottom 80px into the page with a mask, and at full width that does not
+   * read as a soft transition — it reads as an out-of-focus slab floating
+   * on the page, with the next section's heading showing through the haze
+   * underneath it. Worse, the fade dragged the band's own violet and tide
+   * blooms through a grey midpoint on the way to white, which is where the
+   * muddy colour along both edges came from.
+   *
+   * Every other block on this page meets its neighbour on a clean line. A
+   * hard change of ground is the honest version of what this band is: the
+   * page going dark for one section and coming back.
+   *
+   * `deep-band-top` (the page heroes) keeps a fade, and should — a hero
+   * runs up under a transparent header and has only one edge to resolve,
+   * downward into the page. That variant sets its own mask below.
+   */
   .deep-band {
     background: none !important;
     position: relative;
@@ -141,22 +159,15 @@
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(120% 80% at 85% 10%, rgb(90 63 192 / 0.45), transparent 60%),
-      radial-gradient(90% 70% at 0% 90%, rgb(26 163 201 / 0.22), transparent 60%),
+      radial-gradient(115% 75% at 86% 4%, rgb(90 63 192 / 0.5), transparent 62%),
+      radial-gradient(75% 60% at 2% 98%, rgb(23 132 176 / 0.16), transparent 58%),
       linear-gradient(180deg, #0b1140 0%, #070a24 100%);
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
   }
 
   .deep-band.deep-band-top::before,
   .deep-band.deep-band-top.grain::after {
     -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 90px), transparent);
     mask-image: linear-gradient(180deg, #000 calc(100% - 90px), transparent);
-  }
-
-  .deep-band.grain::after {
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
   }
 
   /* A hairline that fades out at both ends, in place of hard rules between blocks. */

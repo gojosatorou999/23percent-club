@@ -54,7 +54,7 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden">
         <div className="g-soft soft-glow" aria-hidden />
         <SymbolField mode="vivid" className="-z-10 opacity-70 [mask-image:radial-gradient(ellipse_65%_75%_at_62%_45%,black_35%,transparent_100%)] max-lg:[mask-image:linear-gradient(180deg,black,transparent_85%)]" />
-        <div className="wrap grid items-center gap-14 pb-20 pt-10 sm:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
+        <div className="wrap grid items-center gap-8 pb-20 pt-6 sm:gap-14 sm:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="stagger">
             <ul className="flex flex-wrap gap-2" aria-label="Learn, invest, grow, compound">
               {PILLARS.map((p) => (
@@ -65,12 +65,12 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <h1 className="t-mega mt-7 max-w-[11ch]">Learn how money works.</h1>
-            <p className="t-lead mt-6 max-w-[46ch]">
+            <h1 className="t-mega mt-5 max-w-[11ch] sm:mt-7">Learn how money works.</h1>
+            <p className="t-lead mt-4 max-w-[46ch] sm:mt-6">
               Lessons, calculators, diagnostics and a dashboard that tracks your progress, built for India. We don&apos;t manage your money.
               We teach you how to manage it.
             </p>
-            <div className="mt-9 flex flex-col gap-3 xs:flex-row">
+            <div className="mt-6 flex flex-col gap-3 xs:flex-row sm:mt-9">
               <Link href="/know-yourself/health" className="btn btn-primary">
                 Take the free health check
               </Link>
@@ -78,7 +78,15 @@ export default function HomePage() {
                 Start learning
               </Link>
             </div>
-            <dl className="mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-line pt-6">
+            {/*
+              Hidden below `sm`: on a phone this row was the difference
+              between the hero's own calculator card sitting just off the
+              bottom of the first screen and it sitting most of a screen
+              height below it. The card is the thing worth landing on —
+              these three counts are the least essential line in the hero
+              and the cheapest to give back.
+            */}
+            <dl className="mt-12 hidden max-w-md grid-cols-3 gap-4 border-t border-line pt-6 sm:grid">
               {[
                 [String(MODULES.length), "modules"],
                 [String(TOOLS.length), "calculators"],

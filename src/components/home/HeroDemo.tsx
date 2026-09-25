@@ -62,7 +62,7 @@ export function HeroDemo() {
         </div>
       </div>
 
-      <div className="rim relative rounded-[28px] border border-line bg-surface p-5 lift-lg sm:p-6">
+      <div className="rim relative rounded-[28px] border border-line bg-surface p-4 lift-lg sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-medium text-ink-3">If you invest every month</p>
@@ -76,7 +76,7 @@ export function HeroDemo() {
           <span className="tag shrink-0">Live</span>
         </div>
 
-        <svg viewBox={`0 0 ${W} ${H}`} className="mt-5 h-[120px] w-full overflow-visible" preserveAspectRatio="none" aria-hidden>
+        <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 h-[92px] w-full overflow-visible sm:mt-5 sm:h-[120px]" preserveAspectRatio="none" aria-hidden>
           <defs>
             <linearGradient id="hero-fill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="var(--series-1)" stopOpacity="0.35" />
@@ -88,7 +88,7 @@ export function HeroDemo() {
           <path d={iv.line} fill="none" stroke="var(--series-2)" strokeWidth="2" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
         </svg>
 
-        <div className="mt-4 space-y-4">
+        <div className="mt-3 space-y-3 sm:mt-4 sm:space-y-4">
           <label className="block">
             <span className="flex items-baseline justify-between text-sm">
               <span className="text-ink-2">Monthly SIP</span>
@@ -124,7 +124,7 @@ export function HeroDemo() {
           </label>
         </div>
 
-        <div className="mt-5 flex h-2 overflow-hidden rounded-full" aria-hidden>
+        <div className="mt-4 flex h-2 overflow-hidden rounded-full sm:mt-5" aria-hidden>
           <div className="h-full bg-series-2" style={{ width: `${investedShare * 100}%` }} />
           <div className="ml-[2px] h-full flex-1 bg-series-1" />
         </div>
@@ -136,7 +136,7 @@ export function HeroDemo() {
             <span className="h-2 w-2 rounded-full bg-series-1" /> Growth <b className="font-semibold text-ink tnum">{inrWords(r.returns)}</b>
           </span>
         </div>
-        <Link href={`/tools/sip-calculator?amount=${monthly}&rate=${rate}&years=${years}`} className="btn btn-ghost btn-sm mt-5 w-full">
+        <Link href={`/tools/sip-calculator?amount=${monthly}&rate=${rate}&years=${years}`} className="btn btn-ghost btn-sm mt-4 w-full sm:mt-5">
           Open the full SIP calculator
         </Link>
       </div>

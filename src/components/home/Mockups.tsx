@@ -90,7 +90,35 @@ export function DiagnoseMock() {
   );
 }
 
+/*
+ * Two bars, one point: under this salary the new regime costs less tax.
+ *
+ * The encoding is the whole component, and it was previously unreadable in
+ * three separate ways. The taller bar was filled `surface-3` (#e8ebfb)
+ * inside a `surface-2` (#f3f5fe) track — a four-percent luminance step, so
+ * the losing bar simply vanished and the panel looked like an empty box
+ * next to a dark blob. The winning bar carried `g-gilded`, a three-stop
+ * navy→indigo→gold ramp whose gold stop sits at 130%, i.e. off the end: in
+ * a short wide box you get the muddy middle of the gradient and nothing
+ * else. And between them the meaning inverted — the *worse* outcome read
+ * as the light, pleasant one and the better outcome as a heavy dark slab.
+ *
+ * Now: one shared track, both bars plainly visible, and colour carrying
+ * the recommendation. The winner is the brand accent (the same blue as the
+ * button beside it), the loser a flat periwinkle that is clearly a bar and
+ * clearly secondary. Heights stay proportional to the amounts.
+ */
+const TAX_BARS = [
+  { k: "Old regime", v: 2.96, fill: "bg-tk-200", label: "text-ink-2" },
+  { k: "New regime", v: 1.51, fill: "bg-accent", label: "text-ink-2", best: true },
+] as const;
+
 export function TaxMock() {
+  // Proportional to the tallest bar rather than hand-set, so the two can
+  // never drift out of step with the figures printed underneath them.
+  const peak = Math.max(...TAX_BARS.map((b) => b.v));
+  const saved = TAX_BARS[0].v - TAX_BARS[1].v;
+
   return (
     <div className="rounded-[28px] border border-line bg-surface p-5 lift-lg sm:p-6" aria-hidden>
       <div className="flex items-center justify-between">
@@ -98,20 +126,28 @@ export function TaxMock() {
         <span className="tag">Income ₹18 lakh</span>
       </div>
       <div className="mt-6 grid grid-cols-2 gap-4">
-        {[
-          { k: "Old regime", v: 2.96, h: 0.92 },
-          { k: "New regime", v: 1.51, h: 0.47, best: true },
-        ].map((r) => (
+        {TAX_BARS.map((r) => (
           <div key={r.k} className="flex flex-col">
             <div className="flex h-44 items-end rounded-2xl bg-surface-2 p-2">
-              <div className={`${r.best ? "g-gilded" : "bg-surface-3"} w-full rounded-xl`} style={{ height: `${r.h * 100}%` }} />
+              <div
+                className={`${r.fill} w-full rounded-xl transition-[height] duration-700 ease-[var(--ease-out-expo)]`}
+                style={{ height: `${(r.v / peak) * 100}%` }}
+              />
             </div>
-            <p className="mt-3 text-sm text-ink-3">{r.k}</p>
+            <div className="mt-3 flex items-center gap-2">
+              <p className="text-sm text-ink-3">{r.k}</p>
+              {"best" in r && r.best && (
+                <span className="rounded-full bg-pos-soft px-2 py-0.5 text-[11px] font-semibold text-pos">Lower</span>
+              )}
+            </div>
             <p className="font-display text-xl font-bold tnum">₹{r.v} lakh</p>
-            {r.best && <p className="mt-1 text-sm font-semibold text-pos">Saves ₹1,45,600</p>}
           </div>
         ))}
       </div>
+      <p className="mt-4 border-t border-line pt-4 text-sm text-ink-2">
+        New regime saves{" "}
+        <b className="font-semibold text-pos tnum">₹{(saved * 100000).toLocaleString("en-IN")}</b> a year.
+      </p>
     </div>
   );
 }
