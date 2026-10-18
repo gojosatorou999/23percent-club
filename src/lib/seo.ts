@@ -6,7 +6,11 @@ export const DESCRIPTION =
   "23percent club is a financial education platform for India: a 13-module School of Finance, 42 calculators, an investor personality test, a financial health check, a tax saving maximizer and a personal learning dashboard. We don't manage your money. We teach you how to manage it.";
 
 export function siteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  // On Vercel, fall back to the project's production domain (set automatically).
+  const vercelHost = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercelHost) return `https://${vercelHost}`;
+  return "http://localhost:3000";
 }
 
 export function pageMeta({
