@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { logIn, signUp, toast } from "@/lib/store/store";
+import { cloudEnabled, logIn, requestPasswordReset, signUp, toast } from "@/lib/store/store";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const router = useRouter();
@@ -16,18 +16,36 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
-    const res = mode === "signup" ? signUp({ name, email, password }) : logIn(email, password);
+    setError(null);
+    setNotice(null);
+    const res = mode === "signup" ? await signUp({ name, email, password }) : await logIn(email, password);
     if (!res.ok) {
       setError(res.error);
       setBusy(false);
       return;
     }
+    if (res.confirm) {
+      setNotice(`We sent a confirmation link to ${email.trim()}. Open it to activate your account, then log in.`);
+      setBusy(false);
+      return;
+    }
     toast(mode === "signup" ? "Account created" : "Welcome back", mode === "signup" ? "Your progress now saves to your account." : undefined, "pos");
     router.push(next.startsWith("/") ? next : "/dashboard");
+  };
+
+  const forgot = async () => {
+    setError(null);
+    setNotice(null);
+    setBusy(true);
+    const res = await requestPasswordReset(email);
+    setBusy(false);
+    if (!res.ok) return setError(res.error);
+    setNotice("If an account exists for that email, a reset link is on its way.");
   };
 
   return (
@@ -81,6 +99,18 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           </span>
         )}
       </div>
+
+      {mode === "login" && cloudEnabled() && (
+        <button type="button" onClick={forgot} disabled={busy || !email.trim()} className="text-sm font-medium text-accent disabled:opacity-50">
+          Forgot your password? Enter your email above, then tap here.
+        </button>
+      )}
+
+      {notice && (
+        <p role="status" className="rounded-xl bg-accent-soft px-4 py-3 text-sm text-ink">
+          {notice}
+        </p>
+      )}
 
       {error && (
         <p role="alert" className="rounded-xl bg-neg-soft px-4 py-3 text-sm text-neg">

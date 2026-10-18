@@ -273,7 +273,9 @@ export function SettingsDash() {
         </div>
       </Card>
       <Card title="Your data">
-        <p className="text-ink-2">Everything is stored in this browser. Download a copy any time.</p>
+        <p className="text-ink-2">
+          {account?.cloud ? "Saved to your account and synced across your devices. Download a copy any time." : "Everything is stored in this browser. Download a copy any time."}
+        </p>
         <button type="button" onClick={download} className="btn btn-ghost mt-4">
           <Download className="h-4 w-4" /> Export my data (JSON)
         </button>
@@ -296,13 +298,14 @@ export function SettingsDash() {
           </div>
           {account && (
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-ink-2">Delete your account and everything stored for it on this device.</p>
+              <p className="text-ink-2">{account?.cloud ? "Delete your account and everything saved for it." : "Delete your account and everything stored for it on this device."}</p>
               <button
                 type="button"
                 className="btn bg-neg text-white"
-                onClick={() => {
-                  if (!window.confirm("Delete your account and all its data from this device? This can't be undone.")) return;
-                  deleteAccount();
+                onClick={async () => {
+                  if (!window.confirm("Delete your account and all its data? This can't be undone.")) return;
+                  const res = await deleteAccount();
+                  if (!res.ok) return toast("Couldn't delete account", res.error);
                   toast("Account deleted");
                   router.push("/");
                 }}

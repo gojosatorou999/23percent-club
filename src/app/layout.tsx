@@ -11,6 +11,7 @@ import { Preloader, SPLASH_SCRIPT } from "@/components/motion/Preloader";
 import { BackToTop } from "@/components/motion/BackToTop";
 import { EdgeLight } from "@/components/motion/EdgeLight";
 import { Toaster } from "@/components/ui/Toaster";
+import { AuthSync } from "@/components/auth/AuthSync";
 import Script from "next/script";
 
 const PLAUSIBLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" ? process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN : undefined;
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BackToTop />
         <SearchLauncher />
         <Toaster />
+        <AuthSync />
         {PLAUSIBLE && <Script defer data-domain={PLAUSIBLE} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}
       </body>
     </html>

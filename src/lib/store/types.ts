@@ -2,7 +2,13 @@ export interface Account {
   id: string;
   name: string;
   email: string;
-  passHash: string;
+  /** Only for accounts kept on this device. Cloud accounts never store a password here. */
+  passHash?: string;
+  /** True when the account lives in Supabase. `id` is then the Supabase user id. */
+  cloud?: boolean;
+  /** Cloud accounts: local changes not yet saved to the server. */
+  dirty?: boolean;
+  syncedAt?: string;
   createdAt: string;
   city?: string;
   ageBand?: string;

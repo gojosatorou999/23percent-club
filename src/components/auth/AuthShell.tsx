@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Check } from "lucide-react";
+import { cloudEnabled } from "@/lib/store/cloud";
 
 export function AuthShell({ title, lead, children }: { title: string; lead: string; children: ReactNode }) {
   return (
@@ -29,8 +30,9 @@ export function AuthShell({ title, lead, children }: { title: string; lead: stri
         <p className="t-lead mt-3">{lead}</p>
         <div className="mt-8">{children}</div>
         <p className="mt-8 rounded-2xl border border-line bg-surface p-4 text-sm text-ink-3">
-          Your account and everything in it are stored in this browser, on this device. We never see your figures. Export or delete them any
-          time from Settings.
+          {cloudEnabled()
+            ? "Your progress is saved to your account so it follows you across devices. We only use it to run your dashboard. Export or delete it any time from Settings."
+            : "Your account and everything in it are stored in this browser, on this device. We never see your figures. Export or delete them any time from Settings."}
         </p>
       </div>
     </section>
